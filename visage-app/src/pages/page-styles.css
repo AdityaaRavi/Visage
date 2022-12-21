@@ -1,3 +1,6 @@
+div{
+    justify-content: space-around;
+}
 @media (max-width: 996px) {
     div{
         align-items: center;
