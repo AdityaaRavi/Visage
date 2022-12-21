@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&family=DM+Sans:wght@400;700&display=swap');
+
+.App {
+  text-align: left;
+  font-family: 'Arimo', sans-serif;
+  /* --bs-light: #ffb58a;
+  --bs-dark: #ff0065;
+  --bs-primary: #ffb58a;
+  --bs-secondary: #ff0065; */
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+  
+}
+
+.App-link {
+  color: #61dafb;
+}
+/* #ffb58a, #ff0065 */
+/* // $theme-colors: (
+//   "Primary": #ffb58a,
+//   "danger": #ff0065
+// ); */
+
+@import 'bootstrap/dist/css/bootstrap.css';
+
+/* Themes */
+
+.btn-dark{
+  --bs-btn-bg: #ff0065;
+  --bs-btn-border-color:var(--bs-btn-bg);
+  --bs-btn-hover-bg: #ff83b4;
+  --bs-btn-hover-border-color:var(--bs-btn-hover-bg);
+}
+
+.btn-primary{
+  --bs-btn-bg: #ffb58a;
+  --bs-btn-border-color:var(--bs-btn-bg);
+  --bs-btn-hover-bg: #ffcdb0;
+  --bs-btn-hover-border-color:var(--bs-btn-hover-bg);
+}
