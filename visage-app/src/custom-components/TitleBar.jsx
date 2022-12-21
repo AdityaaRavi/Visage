@@ -9,12 +9,14 @@ function TitleBar(){
   return (
     <Navbar sticky='top' className='nav-bar'>
       <Container id="nav-container">
-        <Navbar.Brand className="nav-item" id="nav-branding"> VISAGE - THE NETWORKING APP </Navbar.Brand>
+        <div id='brand-container'>
+          <Navbar.Brand className="nav-item" id="nav-branding"> Visage - The Networking App </Navbar.Brand>
+        </div>
         <Nav className="navbar-button-holder">
             <Nav.Link className="nav-item" id="profile-link" href="/profile">Profile</Nav.Link>
             <Nav.Link className="nav-item" id="messages-link" href="/messages">Messages</Nav.Link>
-            <Nav.Link className="nav-item" id="connect-link">Connect</Nav.Link>
-            <Nav.Link className="nav-item" id="settings-link">Settings</Nav.Link>
+            <Nav.Link className="nav-item" id="connect-link" href="/connect">Connect</Nav.Link>
+            <Nav.Link className="nav-item" id="settings-link" href="/settings">Settings</Nav.Link>
             {/* <MDBCol md="6">
               <form className="form-inline mt-4 mb-4">
                 <MDBIcon icon="search" />

@@ -7,8 +7,28 @@
     --bs-dark-rgb: 255, 0, 101;
 }
 
+em{
+    margin: 2px;
+}
+
 .titleBar{
     position: fixed;
+}
+
+.rounded{
+    border-radius: 50%;
+}
+
+#profile-pic{
+    width: 30vw;
+    height: var(width);
+    max-width: 258px;
+    max-height: var(max-width);
+    min-width: 220px;
+    min-height: var(min-width);
+    margin: 43px;
+    margin-left: 0;
+    border-radius: 50%;
 }
 
 .navbar-button-holder{
@@ -32,6 +52,10 @@
     
 }
 
+em{
+    font-weight: 700;
+}
+
 #nav-container{
     margin: 0px;
     padding: 0px;
@@ -40,26 +64,82 @@
     flex-direction: row;
     min-width: 100%;
     /* flex-wrap: wrap; */
-    
 }
-
 .nav-bar{
     --bs-navbar-padding-y: 0px;
 }
 
 #nav-branding{
+ /* background-color: blue;    */
+ align-self: center;
+ justify-self: center;
+}
+
+#brand-container{
     min-width: 50vw;
+    display: flex;
+    /* background-color: aqua; */
+    align-self: flex-start;
 }
 #nav-branding:hover {
     color: white;
 }
 
-@media (max-width: 860px) {
+
+.profile-viewport{
+    display: flex;
+    flex-direction: row;
+}
+
+.skillsDisplay{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 30px;
+}
+.connectionsDisplay{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px;
+}
+.allStatsDisplay{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+@media (max-width: 996px) {
     #nav-container{
         background-image: linear-gradient(to right, #ffb58a, #ff0065);
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+    }
+    #brand-container{
+        align-self: center;
+        justify-self: center;
+    }
+    #nav-branding{
+        margin-left: 25%;
+    }
+    .allStatsDisplay{
+        flex-direction: column;
+    }
+
+    .profile-viewport{
+        flex-direction: column;
+    }
+    #profile-pic{
+        width: 75vw;
+        height: var(width);
+        max-width: 50%;
+        max-height: var(max-width);
+        min-width: 220px;
+        min-height: var(min-width);
+        margin: 43px;
+        margin-left: 0;
+        border-radius: 50%;
     }
 }

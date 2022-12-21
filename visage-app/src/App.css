@@ -24,6 +24,14 @@
 //   "danger": #ff0065
 // ); */
 
+.allContent{
+  margin: 43px;
+}
+
+.pageHeading{
+  font-size: 43px;
+}
+
 @import 'bootstrap/dist/css/bootstrap.css';
 
 /* Themes */

@@ -7,6 +7,8 @@ import TitleBar from './custom-components/TitleBar';
 import Button from 'react-bootstrap/Button';
 import Profile from './pages/Profile';
 import Messages from './pages/Messages';
+import Connect from './pages/Connect';
+import Settings from './pages/Settings';
 
 function App() {
   return (
@@ -14,12 +16,14 @@ function App() {
       <header>
         <TitleBar />
       </header>
-      <body>
+      <body className='allContent'>
       <BrowserRouter>
         <Routes>  
             <Route path="/" element={Profile()} />  
             <Route path="/profile" element={Profile()} />
-            <Route path="/messages" element={Messages()} />  
+            <Route path="/messages" element={Messages()} /> 
+            <Route path="/connect" element={Connect()} />
+            <Route path="/settings" element={Settings()} />   
         </Routes>
       </BrowserRouter> 
       </body>
