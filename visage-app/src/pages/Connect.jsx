@@ -4,7 +4,7 @@ function Connect(){
   
   return (
     <div>
-        Connect
+        <h1> Find New Connections </h1>
     </div>
    );
 }
