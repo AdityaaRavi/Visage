@@ -10,7 +10,7 @@ function Profile(){
     <div>
         <ProfileWhole id={6}/>
         <br />
-        <Button variant="dark" class="editButton">Edit Profile</Button>
+        <Button variant="dark" class="editButton" href='/editProfile'>Edit Profile</Button>
         <hr size="1" width="95%" color="black"/> 
         <UserStats id={6}/>
     </div>

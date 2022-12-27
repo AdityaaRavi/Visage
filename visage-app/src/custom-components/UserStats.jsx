@@ -16,21 +16,11 @@ function UserStats(props){
   return (
     <div class='allStatsDisplay'>
         <div class='connectionsDisplay'>
-            <img
-                    src={process.env.PUBLIC_URL + '/connections.svg'}
-                    // class='img-rounded'
-                    // id='profile-pic'
-                    // alt='...'
-            />
+            <img src={process.env.PUBLIC_URL + '/connections.svg'} />
             <em>Number of Connections:</em> {profile.numConnections} <br />
         </div>
         <div class='skillsDisplay'>
-            <img
-                        src={process.env.PUBLIC_URL + '/skills.svg'}
-                        // class='img-rounded'
-                        // id='profile-pic'
-                        // alt='...'
-            />
+            <img src={process.env.PUBLIC_URL + '/skills.svg'} />
             <div class='skillList'>
                 <em>Top Four Skills:</em>
                 <br/>
