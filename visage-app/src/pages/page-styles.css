@@ -14,12 +14,10 @@
 #MessagesPage{
     display: flex;
     justify-content: space-around;
+    align-items: center;
 }
 
 .messagesHolder{
-    margin: 5vw;
-}
-.personPicker{
     margin: 5vw;
 }
 
@@ -28,6 +26,13 @@
     flex-direction: column;
     align-items: center;
     min-width: 500px;
+}
+
+.personPicker{
+    margin: 5vw;
+}
+.personPickerComponent{
+    margin-top: 15vh;
 }
 
 @media (max-width: 996px) {

@@ -149,7 +149,6 @@ em{
 }
     
 .sentMessages {
-    word-wrap: break-word;
     align-self: flex-end;
     background-color: var(--bs-dark);
     color: #fff;
@@ -164,6 +163,20 @@ em{
     margin: 0.5rem 0;
     width: fit-content;
 }
+
+.personPickerBox{
+    border-radius: 1.15rem;
+    line-height: 1.25;
+    max-width: 75%;
+    padding: 0.5rem .875rem;
+    position: relative;
+    word-wrap: normal;
+}
+/******************************* Dev mode toggle ****/
+.devOnly{
+    visibility: hidden;
+}
+/******************************* Dev mode toggle ****/
 
 @media (max-width: 996px) {
     .messagesHeader{
@@ -213,7 +226,6 @@ em{
         border: 1px solid #e5e5ea;
         border-radius: 0.25rem; */
         display: flex;
-        flex-direction: column;
         font-size: 1rem;
         margin: 0;
         /* max-width: 500px; */

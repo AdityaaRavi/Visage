@@ -13,7 +13,7 @@ function Messages(props){
     const maxMsgLength = 300;
 
     function getMessages(id, otherPersonId){
-        /* AJAX request goes here*/
+        /* AJAX request to get messages from the server goes here*/
         return({
             messages:[
                 {sender: id, message: 'Hey!'},
@@ -51,10 +51,14 @@ function Messages(props){
     }
 
     const sendMessage = () => {
-        /* AJAX request goes here*/
+        /* AJAX request to send message to server goes here*/
+
         console.log(`Message sent! from ${props.id} to ${props.otherPersonId}: ${message}`);
         const messageObj = getMessages(props.id, props.otherPersonId);
         setMessages(messageObj.messages);
+        setMessage('');
+        setCharCount(0);
+        setFormError(true);
     }
 
   return (
@@ -90,6 +94,7 @@ function Messages(props){
               </MDBCol>
             </MDBRow>
         </div>
+        <div className='devOnly'>{props.otherPersonId}</div>
     </div>
     );
 }

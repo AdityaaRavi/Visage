@@ -49,3 +49,8 @@
   --bs-btn-hover-bg: #ffcdb0;
   --bs-btn-hover-border-color:var(--bs-btn-hover-bg);
 }
+
+.list-group-item.active {
+  --bs-list-group-active-bg: var(--bs-dark);
+  --bs-list-group-active-border-color: var(--bs-list-group-active-bg);
+}
