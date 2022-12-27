@@ -129,14 +129,14 @@ em{
     border-radius: 0.25rem;
     /***************************/
     display: flex;
-    flex-direction: column;
-    font-size: 1rem;
+    flex-direction: column-reverse;
+    font-size: 0.7rem;
     margin: 0 auto 1rem;
     max-width: 500px;
     padding: 0.5rem 1.5rem;
     align-items: flex-start;
     overflow: scroll;
-    max-height: 65vh;
+    max-height: 60vh;
   }
   
 .messages {
@@ -166,6 +166,9 @@ em{
 }
 
 @media (max-width: 996px) {
+    .messagesHeader{
+        margin-top: 5vh;
+    }
     #nav-container{
         background-image: linear-gradient(to right, #ffb58a, #ff0065);
         display: flex;

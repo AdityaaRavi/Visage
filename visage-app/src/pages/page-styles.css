@@ -1,4 +1,3 @@
-
 .VerticalDivider{
     border-left: 0;/*px solid gray; */
     height: 85vh;
@@ -14,7 +13,7 @@
 
 #MessagesPage{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .messagesHolder{

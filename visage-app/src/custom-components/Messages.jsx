@@ -61,7 +61,7 @@ function Messages(props){
     <div>
         <h2 className='messagesHeader'>{OtherPersonName}</h2>
         <div className='messagesContainer'>
-            {messages.map((message) => (message.sender === props.id) ? <p className='messages sentMessages'>{message.message}</p> : <p className='messages recievedMessages'>{message.message}</p>)}
+            {messages.map((message) => (message.sender === props.id) ? <p className='messages sentMessages'>{message.message}</p> : <p className='messages recievedMessages'>{message.message}</p>).reverse()}
         </div>
         <div>
             <MDBRow className='g-3 align-items-center'>
