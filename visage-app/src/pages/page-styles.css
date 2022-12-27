@@ -1,8 +1,54 @@
 div{
     justify-content: space-around;
 }
+
+.VerticalDivider{
+    border-left: 0;/*px solid gray; */
+    height: 85vh;
+    position: absolute;
+    left: 50%;
+    margin-left: -3px;
+    top: 10vh;
+    
+}
+.HorizontalDivider{
+    height: 0;
+}
+
+#MessagesPage{
+    display: flex;
+    justify-content: space-between;
+}
+
+.messagesHolder{
+    margin: 5vw;
+}
+.personPicker{
+    margin: 5vw;
+}
+
+.messageHolderLvl2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 @media (max-width: 996px) {
     div{
         align-items: center;
+    }
+    .VerticalDivider{
+        border-left: 0ch;
+        border-bottom: 0.5px solid gray;
+        width: 85vw;
+        height: auto;
+        position: relative;
+        left: auto;
+        margin-left: -3px;
+        top: auto;
+
+    }
+    #MessagesPage{
+        flex-direction: column;
     }
 }
