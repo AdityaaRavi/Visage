@@ -21,11 +21,22 @@ function MessagesInputBox(props){
         /* AJAX request to send message to server goes here*/
 
         console.log(`Message sent! from ${props.id} to ${props.otherPersonId}: ${message}`);
-        const messageObj = props.getMessages(props.id, props.otherPersonId);
-        props.setMessages(messageObj.messages);
+        
+        if(props.getMessages){
+            const messageObj = props.getMessages(props.id, props.otherPersonId);
+            props.setMessages(messageObj.messages);
+        }
+        
         setMessage('');
         setCharCount(0);
         setFormError(true);
+    }
+
+    const onEnterPress = (e) => {
+        if(e.keyCode == 13 && (e.ctrlKey == true) && !formError) {
+            e.preventDefault();
+            sendMessage();
+        }
     }
 
   return (
@@ -35,6 +46,7 @@ function MessagesInputBox(props){
                 onChange={onChange}
                 onFocus={onChange}
                 onBlur={onChange}
+                onKeyDown={onEnterPress}
                 label='Type your message here'
                 id='messageInput'
                 value={message}
@@ -42,6 +54,7 @@ function MessagesInputBox(props){
             <MDBCol>
             <span id='textExample2' className='form-text'>
                 {(charCount > maxMsgLength || charCount == 0) ? <span style={{color: 'red'}}>{charCount}/{maxMsgLength}</span> : <span>{charCount}/{maxMsgLength}</span>}
+                <br /> ctrl + enter to send
                 {/* {(charCount > maxMsgLength) ? <span style={{color: 'red'}}><br/>Too many characters</span> : ''} */}
             </span>
             </MDBCol>
