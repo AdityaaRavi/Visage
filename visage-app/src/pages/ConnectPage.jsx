@@ -3,15 +3,15 @@ import PersonPicker from '../custom-components/PersonPicker';
 import { useState, useEffect } from 'react';
 import Messages from '../custom-components/Messages';
 
-function MessagesPage(props){
+function ConnectPage(props){
   
   const [otherPersonId, setOtherPerson] = useState(2);
 
   return (
-    <div id='MessagesPage'>
+    <div id='ConnectionsPage'>
       <div class='personPicker'>
-        <h1>Current Connections</h1>
-        <PersonPicker className='personPickerComponent' id={props.id} picker={setOtherPerson} otherPersonId={otherPersonId} getNew={false}/>
+        <h1>Suggested Connections</h1>
+        <PersonPicker className='personPickerComponent' id={props.id} picker={setOtherPerson} otherPersonId={otherPersonId} getNew={true}/>
       </div>
       <div class='VerticalDivider'></div>
         <div class='messageHolderLvl2'>
@@ -23,4 +23,4 @@ function MessagesPage(props){
     );
 }
 
-export default MessagesPage;
+export default ConnectPage;

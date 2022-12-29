@@ -6,7 +6,7 @@ import TitleBar from './custom-components/TitleBar';
 import Button from 'react-bootstrap/Button';
 import Profile from './pages/Profile';
 import MessagesPage from './pages/MessagesPage';
-import Connect from './pages/Connect';
+import ConnectPage from './pages/ConnectPage';
 import Settings from './pages/Settings';
 import EditProfile from './pages/EditProfile';
 
@@ -24,7 +24,7 @@ function App() {
             <Route path="/" element={<Profile id={id}/>} />  
             <Route path="/profile" element={<Profile id={id}/>} />
             <Route path="/messages" element={<MessagesPage id={id}/>} /> 
-            <Route path="/connect" element={<Connect id={id}/>} />
+            <Route path="/connect" element={<ConnectPage id={id}/>} />
             <Route path="/settings" element={<Settings id={id}/>} /> 
             <Route path="/editProfile" element={<EditProfile id={id}/>} />   
         </Routes>
