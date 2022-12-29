@@ -172,6 +172,18 @@ em{
     position: relative;
     word-wrap: normal;
 }
+
+.alwaysPotrait{
+    flex-direction: column;
+    align-items: center;
+}
+
+.halfPageComponent{
+    margin-left: 5vw;
+    max-width: 100%;
+    margin-right: 0;
+}
+
 /******************************* Dev mode toggle ****/
 .devOnly{
     visibility: hidden;

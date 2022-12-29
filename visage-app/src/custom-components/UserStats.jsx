@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 function UserStats(props){
 
+    console.log(props);
     const profile = ((id) => {
         /* AJAX request goes here*/
         return({
@@ -16,11 +17,15 @@ function UserStats(props){
   return (
     <div class='allStatsDisplay'>
         <div class='connectionsDisplay'>
-            <img src={process.env.PUBLIC_URL + '/connections.svg'} />
+            {!props.inConnectionPage &&
+                <img src={process.env.PUBLIC_URL + '/connections.svg'} />
+            }
             <em>Number of Connections:</em> {profile.numConnections} <br />
         </div>
         <div class='skillsDisplay'>
-            <img src={process.env.PUBLIC_URL + '/skills.svg'} />
+            {!props.inConnectionPage &&
+                <img src={process.env.PUBLIC_URL + '/skills.svg'} />
+            }
             <div class='skillList'>
                 <em>Top Four Skills:</em>
                 <br/>

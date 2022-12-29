@@ -17,6 +17,12 @@
     align-items: center;
 }
 
+#ConnectionsPage{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
 .messagesHolder{
     margin: 5vw;
 }
@@ -35,6 +41,12 @@
     margin-top: 15vh;
 }
 
+#ConnectionsPage{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
 @media (max-width: 996px) {
     div{
         align-items: center;
@@ -51,6 +63,9 @@
 
     }
     #MessagesPage{
+        flex-direction: column;
+    }
+    #ConnectionsPage{
         flex-direction: column;
     }
 }
