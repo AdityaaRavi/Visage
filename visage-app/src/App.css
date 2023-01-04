@@ -36,6 +36,20 @@
 
 /* Themes */
 
+:root{
+  --bs-light: #ffb58a;
+  --bs-dark: #ff0065;
+  --bs-primary: #ffb58a;
+  --bs-secondary: #ff0065;
+  --bs-light-rgb: 255, 181, 138;
+  --bs-dark-rgb: 255, 0, 101;
+  --bs-light-rgb: 255, 181, 138;
+  --bs-dark-rgb: 255, 0, 101;
+  --bs-light-rgba: 255, 181, 138, 0.5;
+  --bs-dark-rgba: 255, 0, 101, 0.5;
+  --bs-badge-color: #000;
+}
+
 .btn-dark{
   --bs-btn-bg: #ff0065;
   --bs-btn-border-color:var(--bs-btn-bg);
@@ -53,4 +67,15 @@
 .list-group-item.active {
   --bs-list-group-active-bg: var(--bs-dark);
   --bs-list-group-active-border-color: var(--bs-list-group-active-bg);
+}
+.bg-primary {
+  --bs-bg-opacity: 0.7;
+  background-color: rgba(245, 170, 130, var(--bs-bg-opacity)) !important;
+}
+/* .Badge.bg-primary{
+    --bs-badge-color: #000;
+} */
+
+span.badge{
+  --bs-badge-color: #000;
 }
