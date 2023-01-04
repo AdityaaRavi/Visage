@@ -21,12 +21,13 @@ function App() {
       <body className='allContent'>
       <BrowserRouter>
         <Routes>  
-            <Route path="/" element={<Profile id={id}/>} />  
-            <Route path="/profile" element={<Profile id={id}/>} />
+            <Route path="/" element={<Profile id={id}/>} />  {/* Replace with login */}
+            {/* If not logged in, only the login component should be shown regardless of path */}
+            <Route path="/profile" element={<Profile id={id}/>} /> 
             <Route path="/messages" element={<MessagesPage id={id}/>} /> 
             <Route path="/connect" element={<ConnectPage id={id}/>} />
             <Route path="/settings" element={<Settings id={id}/>} /> 
-            <Route path="/editProfile" element={<EditProfile id={id}/>} />   
+            <Route path="/editProfile" element={<Settings id={id}/>/*<EditProfile id={id}/>*/} />   
         </Routes>
       </BrowserRouter> 
       </body>

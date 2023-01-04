@@ -19,6 +19,7 @@ function ConnectPage(props){
           <Profile id={props.id} inConnectionPage={true}/>
           {/* id is to identify the current user, person 
           is to identify the person at the other end of the conversation */}
+          <div>Start a conversation:</div>
           <MessagesInputBox id={props.id} otherPersonId={otherPersonId} />
         </div>
     </div>
