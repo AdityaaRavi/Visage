@@ -33,7 +33,7 @@ function MessagesInputBox(props){
     }
 
     const onEnterPress = (e) => {
-        if(e.keyCode == 13 && (e.ctrlKey == true) && !formError) {
+        if(e.keyCode === 13 && (e.ctrlKey === true) && !formError) {
             e.preventDefault();
             sendMessage();
         }
@@ -53,7 +53,7 @@ function MessagesInputBox(props){
             />
             <MDBCol>
             <span id='textExample2' className='form-text'>
-                {(charCount > maxMsgLength || charCount == 0) ? <span style={{color: 'red'}}>{charCount}/{maxMsgLength}</span> : <span>{charCount}/{maxMsgLength}</span>}
+                {(charCount > maxMsgLength || charCount === 0) ? <span style={{color: 'red'}}>{charCount}/{maxMsgLength}</span> : <span>{charCount}/{maxMsgLength}</span>}
                 <br /> ctrl + enter to send
                 {/* {(charCount > maxMsgLength) ? <span style={{color: 'red'}}><br/>Too many characters</span> : ''} */}
             </span>
