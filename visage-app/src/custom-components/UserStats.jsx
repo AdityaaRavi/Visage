@@ -1,18 +1,22 @@
 import './component-styles.css';
 import { Image } from 'react-bootstrap';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 
 function UserStats(props){
+    const [userStats, setUserStats] = useState();
 
-    console.log(props);
-    const profile = ((id) => {
-        /* AJAX request goes here*/
-        return({
-            numConnections: 52,
-            top4Skills: ['React.js', 'Tensorflow', 'Java', 'Leadership']
-        })
-    })(props.id)
+    useEffect(() => {
+        axios
+           .get(`/userStats/`, { params: {userId: props.id} })
+           .then((response) => {
+                setUserStats(response.data);
+           })
+           .catch((err) => {
+              console.log(err);
+           });
+     }, []);
 
   return (
     <div class='allStatsDisplay'>
@@ -20,7 +24,7 @@ function UserStats(props){
             {!props.inConnectionPage &&
                 <img src={process.env.PUBLIC_URL + '/connections.svg'} />
             }
-            <em>Number of Connections:</em> {profile.numConnections} <br />
+            <em>Number of Connections:</em> {userStats && userStats.numConnections} <br />
         </div>
         <div class='skillsDisplay'>
             {!props.inConnectionPage &&
@@ -30,7 +34,7 @@ function UserStats(props){
                 <em>Top Four Skills:</em>
                 <br/>
                 <ul>
-                    {profile.top4Skills.map((skill) => <li>{skill}</li>)}
+                    {userStats && userStats.top4Skills.map((skill) => <li>{skill}</li>)}
                 </ul>
             </div>
         </div>
