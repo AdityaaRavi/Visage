@@ -4,14 +4,19 @@ import { useState, useEffect } from 'react';
 import MessagesInputBox from '../custom-components/MessageInputBox';
 import Profile from './Profile';
 import { Button } from 'react-bootstrap';
+import axios from 'axios';
 
 function ConnectPage(props){
   
   const [otherPersonId, setOtherPerson] = useState(2);
 
-  const onDeclineConnectionButtonClick = () => {
+  const onDeclineConnectionButtonClick = (e) => {
     /* AJAX call to remove connection */
-    console.log("Connection removed")
+    axios.post('/declineSuggestion', {userId: props.id, otherPersonId: otherPersonId})
+         .then((response) => {
+            console.log(response.data);
+            setOtherPerson(-1);
+          });         
   }
 
   return (
