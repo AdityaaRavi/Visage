@@ -39,4 +39,4 @@ CREATE TABLE `user_info` (
 	PRIMARY KEY (`userId`),
     KEY `search` (`name`,`org1`),
     KEY `search1` (`name`,`school1`)
-);
+); 
