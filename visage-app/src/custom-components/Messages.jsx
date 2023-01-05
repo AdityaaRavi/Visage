@@ -11,6 +11,7 @@ function Messages(props){
     const [messages, setMessages] = useState();
 
     useEffect(() => {
+        console.log('Messages useEffect');
         axios
            .get(`/getMessages/`, { params: {userId: props.id, otherPersonId: props.otherPersonId} })
            .then((response) => {
@@ -20,7 +21,7 @@ function Messages(props){
            .catch((err) => {
               console.log(err);
            });
-     }, []);
+     }, [props.otherPersonId]);
 
   return (
     <div>
