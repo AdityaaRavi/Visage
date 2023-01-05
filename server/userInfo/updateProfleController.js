@@ -1,6 +1,7 @@
 const updateProfileController = (req, res) => {
     const userId = req.body.userId;
     const name = req.body.name;
+    const email = req.body.email;
     const orgs = req.body.orgs;
     const schools = req.body.schools;
     const career = req.body.career;
