@@ -10,7 +10,6 @@ function PersonPicker(props){
 
     const getConnections = (id, getNew) => {
         /* AJAX request goes here*/
-
         let connections = [
             {id: 1, name: 'John Doe', orgs: ['SacHacks'], schools: ['University of California, Davis'], career: ['Full Stack Development', 'Machine Learning'], fun: ['Biking', 'Badminton'], description: 'Open to chat and connect!'},
             {id: 2, name: 'Jane Doe', orgs: ['Google DSC at UCD', 'UCD CS Tutoring Commitee'], schools: ['University of California, Davis'], career: ['Machine Learning', 'Hackathons'], fun: ['Travel', 'Badminton'], description: 'Open to discussing about Machine Learning and Hackathons!'},
@@ -47,7 +46,11 @@ function PersonPicker(props){
 
         return(connections);
     };
-    useEffect(() => setConnections(getConnections(props.id, props.getNew)), []);
+    useEffect(() => {
+        let connections = getConnections(props.id, props.getNew);
+        setConnections(connections);
+        if(props.otherPersonId === -1) props.picker(connections[0].id);
+    }, [props.otherPersonId]);
 
   return (
     <div>
