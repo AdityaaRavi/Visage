@@ -5,7 +5,8 @@ CREATE TABLE `user_login` (
 	`name` VARCHAR(70) NOT NULL,
 	`email` VARCHAR(100) NOT NULL,
 	`password` VARCHAR(100) NOT NULL,
-	`time_of_update` TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`time_of_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`time_of_creation` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`email`),
     KEY `userId_key` (`userId`)
 );
@@ -33,8 +34,8 @@ CREATE TABLE `user_info` (
 	`fun2` VARCHAR(50),
 	`fun3` VARCHAR(50),
 	`description` VARCHAR(300),
-	`time_of_update` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    `time_of_creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	`time_of_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `time_of_creation` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`userId`),
     KEY `search` (`name`,`org1`),
     KEY `search1` (`name`,`school1`)
