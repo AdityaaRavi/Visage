@@ -4,6 +4,9 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 
+// This will add the body of a POST request to the req.body object
+app.use(express.json());
+
 app.get("/hello", (req, res) => {
   res.json({ message: "Hello from server!" });
 });
@@ -139,7 +142,7 @@ app.post('/createUser', (req, res) => {
   try{
     // Create user
     res.json({
-      message: `User created successfully!`,
+      message: `User created successfully!\nName: ${name}, userId: ${userId}`,
       userId: userId
     });
   } catch (err) {
@@ -150,30 +153,14 @@ app.post('/createUser', (req, res) => {
 
 // POST request to send a message to a user
 app.post('/sendMessage/', (req, res) => {
-  const senderId = req.body.senderId;
-  const recepientId = req.body.recepientId;
+  const senderId = req.body.userId;
+  const recepientId = req.body.otherPersonId;
   const message = req.body.message;
 
   try{
-    // Send message to user
+    // Insert message into database
     res.json({
       message: `Message sent successfully! from ${senderId} to ${recepientId}`
-    });
-  } catch (err) {
-    res.json(err);
-  }
-});
-
-// POST request to remove a connection
-// POST /removeConnection/:userId
-app.post('/removeConnection/', (req, res) => {
-  const userId = req.body.userId;
-  const otherPersonId = req.body.otherPersonId;
-
-  try{
-    // Remove connection
-    res.json({
-      message: `Connection removed successfully! from ${userId} to ${otherPersonId}`
     });
   } catch (err) {
     res.json(err);
@@ -211,6 +198,7 @@ app.post('/declineSuggestion/', (req, res) => {
 });
 
 // POST request to accept a suggested connection
+/// Might not need an endpoint for this... If a person sends a message, the other person should automatically be considered a connection.
 app.post('/acceptSuggestion/', (req, res) => {
   const userId = req.body.userId;
   const otherPersonId = req.body.otherPersonId;

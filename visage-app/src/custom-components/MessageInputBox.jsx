@@ -2,6 +2,7 @@ import './component-styles.css';
 import { useState, useEffect } from 'react';
 import { MDBInput, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 import { Button } from 'react-bootstrap';
+import axios from 'axios';
 
 function MessagesInputBox(props){
 
@@ -19,17 +20,22 @@ function MessagesInputBox(props){
 
     const sendMessage = () => {
         /* AJAX request to send message to server goes here*/
+        try{
+            axios.post('/sendMessage', {userId: props.id, otherPersonId: props.otherPersonId, message: message})
+                 .then((response) => {console.log(response.data)})
+            
+            // Update messages in parent component (iff inside Messages.jsx)
+            if(props.messages){
+                props.setMessages(props.messages.concat({sender: props.id, message: message}));
+            }
 
-        console.log(`Message sent! from ${props.id} to ${props.otherPersonId}: ${message}`);
-        
-        if(props.getMessages){
-            const messageObj = props.getMessages(props.id, props.otherPersonId);
-            props.setMessages(messageObj.messages);
+            setMessage('');
+            setCharCount(0);
+            setFormError(true);
+            console.log(`Message sent! from ${props.id} to ${props.otherPersonId}: ${message}`);
+        } catch (err) {
+            console.log(err);
         }
-        
-        setMessage('');
-        setCharCount(0);
-        setFormError(true);
     }
 
     const onEnterPress = (e) => {
