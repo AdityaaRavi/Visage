@@ -11,6 +11,9 @@
     height: 0;
 }
 
+.declineConnectionButton{
+    margin-top: 3vh;
+}
 #MessagesPage{
     display: flex;
     justify-content: space-around;

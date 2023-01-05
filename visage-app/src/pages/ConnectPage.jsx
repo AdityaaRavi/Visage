@@ -3,10 +3,16 @@ import PersonPicker from '../custom-components/PersonPicker';
 import { useState, useEffect } from 'react';
 import MessagesInputBox from '../custom-components/MessageInputBox';
 import Profile from './Profile';
+import { Button } from 'react-bootstrap';
 
 function ConnectPage(props){
   
   const [otherPersonId, setOtherPerson] = useState(2);
+
+  const onDeclineConnectionButtonClick = () => {
+    /* AJAX call to remove connection */
+    console.log("Connection removed")
+  }
 
   return (
     <div id='ConnectionsPage'>
@@ -21,6 +27,13 @@ function ConnectPage(props){
           is to identify the person at the other end of the conversation */}
           <div>Start a conversation:</div>
           <MessagesInputBox id={props.id} otherPersonId={otherPersonId} />
+          <div>
+            <Button variant='primary' 
+            className='declineConnectionButton'
+            onClick={onDeclineConnectionButtonClick} >
+              Decline Connection Suggestion
+            </Button>
+          </div>
         </div>
     </div>
     );
