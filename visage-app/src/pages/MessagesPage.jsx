@@ -3,14 +3,19 @@ import PersonPicker from '../custom-components/PersonPicker';
 import { useState, useEffect } from 'react';
 import Messages from '../custom-components/Messages';
 import { Button } from 'react-bootstrap';
+import axios from 'axios';
 
 function MessagesPage(props){
   
   const [otherPersonId, setOtherPerson] = useState(2);
 
-  const onRemoveConnectionButtonClick = () => {
+  const onRemoveConnectionButtonClick = (e) => {
     /* AJAX call to remove connection */
-    console.log("Connection removed")
+    axios.post('/removeConnection', {userId: props.id, otherPersonId: otherPersonId})
+         .then((response) => {
+            console.log(response.data);
+            setOtherPerson(-1);
+          });         
   }
 
   return (
