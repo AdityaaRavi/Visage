@@ -10,6 +10,7 @@ app.use(express.json());
 app.get("/hello", (req, res) => {
   res.json({ message: "Hello from server!" });
 });
+////////////////////////////////// User info //////////////////////////////////
 
 // GET request for user stats
 app.get("/userStats/", (req, res) => {
@@ -21,7 +22,62 @@ app.get("/userStats/", (req, res) => {
     top4Skills: ["React.js", "Tensorflow", "Java", "Leadership"],
   });
 });
+// GET request to get a user's profile
+app.get('/getProfile/', (req, res) => {
+  const userId = req.query.userId;
+  
+  res.json({
+    id: userId,
+    name: 'Adityaa Ravi',
+    orgs: ['SacHacks', 'PayPal', 'Google DSC at UCD', 'UCD CS Tutoring Commitee'],
+    schools: ['University of California, Davis'],
+    career: ['Full Stack Development', 'Machine Learning', 'Hackathons'],
+    fun: ['Biking', 'Travel', 'Badminton'],
+    description: 'I am currently looking for an Software Engineering Internship for Spring 2023.' + 
+    ' Open to chat and connect!'
+  });
+});
 
+// POST request to create a user account --- NOT YET IMPLEMENTED ON THE FRONTEND
+app.post('/createUser', (req, res) => {
+  const name = req.body.name;
+  const email = req.body.email;
+  const password = req.body.password;
+  const userId = math.random();
+  
+  try{
+    // Create user
+    res.json({
+      message: `User created successfully!\nName: ${name}, userId: ${userId}`,
+      userId: userId
+    });
+  } catch (err) {
+    res.json(err);
+  }
+});
+
+// POST request to update a user's profile --- NOT YET IMPLEMENTED ON THE FRONTEND
+app.post('/updateProfile', (req, res) => {
+  const userId = req.body.userId;
+  const name = req.body.name;
+  const orgs = req.body.orgs;
+  const schools = req.body.schools;
+  const career = req.body.career;
+  const fun = req.body.fun;
+  const description = req.body.description;
+
+  try{
+    // Update user
+    res.json({
+      message: `User updated successfully!\nName: ${name}, userId: ${userId}`,
+      userId: userId
+    });
+  } catch (err) {
+    res.json(err);
+  }
+});
+
+////////////////////////////////// Messaging //////////////////////////////////
 // GET request for all the messages between two users
 app.get("/getMessages/", (req, res) => {
   const userId = req.query.userId;
@@ -55,6 +111,23 @@ app.get("/getMessages/", (req, res) => {
   res.json(toSend);
 }); 
 
+// POST request to send a message to a user
+app.post('/sendMessage/', (req, res) => {
+  const senderId = req.body.userId;
+  const recepientId = req.body.otherPersonId;
+  const message = req.body.message;
+
+  try{
+    // Insert message into database
+    res.json({
+      message: `Message sent successfully! from ${senderId} to ${recepientId}`
+    });
+  } catch (err) {
+    res.json(err);
+  }
+});
+
+////////////////////////////////// Connections //////////////////////////////////
 // GET request for all the connections of a user
 app.get("/getExistingConnections/", (req, res) => {
 
@@ -98,57 +171,6 @@ app.get('/getSuggestedConnections/', (req, res) => {
     {id: 5, name: 'Jane Doe', orgs: ['Google DSC at UCD', 'UCD CS Tutoring Commitee'], schools: ['University of California, Davis'], career: ['Machine Learning', 'Hackathons'], fun: ['Travel', 'Badminton'], description: 'Open to discussing about Machine Learning and Hackathons!'},
     {id: 6, name: 'John Smith', orgs: ['UCD CS Tutoring Commitee'], schools: ['University of California, Davis'], career: ['Full Stack Development', 'Hackathons'], fun: ['Biking', 'Travel'], description: 'Open to discussing about Full Stack Development and Hackathons!'},
   ]);
-});
-
-// GET request to get a user's profile
-app.get('/getProfile/', (req, res) => {
-  const userId = req.query.userId;
-  
-  res.json({
-    id: userId,
-    name: 'Adityaa Ravi',
-    orgs: ['SacHacks', 'PayPal', 'Google DSC at UCD', 'UCD CS Tutoring Commitee'],
-    schools: ['University of California, Davis'],
-    career: ['Full Stack Development', 'Machine Learning', 'Hackathons'],
-    fun: ['Biking', 'Travel', 'Badminton'],
-    description: 'I am currently looking for an Software Engineering Internship for Spring 2023.' + 
-    ' Open to chat and connect!'
-  });
-});
-
-// POST request to create a user
-app.post('/createUser', (req, res) => {
-  const name = req.body.name;
-  const email = req.body.email;
-  const password = req.body.password;
-  const userId = math.random();
-  
-  try{
-    // Create user
-    res.json({
-      message: `User created successfully!\nName: ${name}, userId: ${userId}`,
-      userId: userId
-    });
-  } catch (err) {
-    res.json(err);
-  }
-});
-
-
-// POST request to send a message to a user
-app.post('/sendMessage/', (req, res) => {
-  const senderId = req.body.userId;
-  const recepientId = req.body.otherPersonId;
-  const message = req.body.message;
-
-  try{
-    // Insert message into database
-    res.json({
-      message: `Message sent successfully! from ${senderId} to ${recepientId}`
-    });
-  } catch (err) {
-    res.json(err);
-  }
 });
 
 // POST request to remove a connection
