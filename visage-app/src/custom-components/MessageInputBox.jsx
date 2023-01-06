@@ -22,9 +22,12 @@ function MessagesInputBox(props){
         /* AJAX request to send message to server goes here*/
         try{
             axios.post('/sendMessage', {userId: props.id, otherPersonId: props.otherPersonId, message: message})
-                 .then((response) => {console.log(response.data)})
+                 .then((response) => {console.log(response.data)});
             
             // Update messages in parent component (iff inside Messages.jsx)
+            /////// We are directly editing the the message display component instead of sending a get request to get the most recent
+            /////// messages from the server. This is to help hide the asynchronicity of AJAX requests from the user and to make
+            /////// the app feel more responsive.
             if(props.messages){
                 props.setMessages(props.messages.concat({sender_userID: props.id, message: message}));
             }
