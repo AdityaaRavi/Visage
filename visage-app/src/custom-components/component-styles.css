@@ -11,6 +11,10 @@
     --bs-dark-rgba: 255, 0, 101, 0.5;
 }
 
+body{
+    font-size: 16px;
+}
+
 em{
     margin: 2px;
 }
@@ -136,13 +140,14 @@ em{
     /***************************/
     display: flex;
     flex-direction: column-reverse;
-    font-size: 0.7rem;
+    /* font-size: 16px; 0.7rem; */
     margin: 0 auto 1rem;
     max-width: 500px;
     padding: 0.5rem 1.5rem;
     align-items: flex-start;
     overflow: scroll;
     max-height: 60vh;
+    min-height: 30vh;
   }
   
 .messages {
@@ -197,6 +202,9 @@ em{
 /******************************* Dev mode toggle ****/
 
 @media (max-width: 996px) {
+    body{
+        font-size: 13px;
+    }
     .messagesHeader{
         margin-top: 5vh;
     }
@@ -244,7 +252,7 @@ em{
         border: 1px solid #e5e5ea;
         border-radius: 0.25rem; */
         display: flex;
-        font-size: 1rem;
+        font-size: 13px;
         margin: 0;
         /* max-width: 500px; */
         padding: 0.5rem 1.5rem;
@@ -253,11 +261,14 @@ em{
 }
 
 @media (max-width: 500px) {
+    body{
+        font-size: 9px;
+    }
     .messagesContainer {
         /* background-color: #fff;
         border: 1px solid #e5e5ea;
         border-radius: 0.25rem; */
-        font-size: 0.75rem;
+        font-size: 9px;
         padding: 0;
         margin: none;
       }
@@ -267,10 +278,13 @@ em{
     }
     .nav-bar{
         --bs-navbar-padding-y: 0px;
-        font-size: smaller;
+        /* font-size: smaller; */
         /* position: fixed; */
     }
     .nav-branding{
-        font-size: smaller;
+        /* font-size: smaller; */
+        margin: 0;
+        padding: 0;
+        justify-self: flex-start;
     }
 }
