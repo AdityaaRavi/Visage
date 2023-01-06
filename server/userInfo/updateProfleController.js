@@ -1,22 +1,57 @@
-const updateProfileController = (req, res) => {
-    const userId = req.body.userId;
-    const name = req.body.name;
-    const email = req.body.email;
-    const orgs = req.body.orgs;
-    const schools = req.body.schools;
-    const career = req.body.career;
-    const fun = req.body.fun;
-    const description = req.body.description;
+const updateProfileController = (req, res, mysqlConnection) => {
+  const name = req.body.name;
+  const email = req.body.email;
+  const password = req.body.password;
+  let userId = req.body.userId;
   
-    try{
-      // Update user
-      res.json({
-        message: `User updated successfully!\nName: ${name}, userId: ${userId}`,
-        userId: userId
+  let topSkills = req.body.topSkills;
+  
+  let orgs = req.body.orgs;
+  if (orgs.length < 4) for (let i = orgs.length; i < 4; i++) orgs.push(null);
+  
+  let schools = req.body.schools;
+  if (schools.length < 3) for (let i = schools.length; i < 3; i++) schools.push(null);
+  
+  let career = req.body.career;
+  if (career.length < 3) for (let i = career.length; i < 3; i++) career.push(null);
+  
+  let fun = req.body.fun;
+  if (fun.length < 3) for (let i = fun.length; i < 3; i++) fun.push(null);
+  
+  const description = req.body.description;
+  
+  try{
+    // Create user
+    mysqlConnection.query("use visage_app;", (err) => {if (err) throw err;});
+    mysqlConnection.query('UPDATE user_login SET name=?, email=?, password=? ' +
+                          'WHERE userId=?;', [name, email, password, userId], (err, result) => {
+      if (err) throw err;
+      
+      const param = [name, 
+        topSkills[0], topSkills[1], topSkills[2], topSkills[3],
+        orgs[0], orgs[1], orgs[2], orgs[3],
+        schools[0], schools[1], schools[2],
+        career[0], career[1], career[2],
+        fun[0], fun[1], fun[2],
+        description, userId]
+      
+      mysqlConnection.query('UPDATE user_info '+
+                            'SET name=?, top_skill1=?, top_skill2=?, top_skill3=?, top_skill4=?, org1=?, org2=?, org3=?, org4=?, school1=?, school2=?, school3=?, career1=?, career2=?, career3=?, fun1=?, fun2=?, fun3=?, description=? ' +
+                            'WHERE userId=?;'
+                          , param, (err, result2) => {
+        if (err) throw err;
+        res.json({
+          message: `User updated successfully!\nName: ${name}, userId: ${userId}`,
+          userId: userId
+        });
       });
-    } catch (err) {
-      res.json(err);
-    }
+    });
+
+  } catch (err) {
+    console.log(err);
+    res.json(err);
+  }
+
 };
 
 export default updateProfileController;
