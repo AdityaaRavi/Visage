@@ -1,17 +1,26 @@
-const getProfileController = (req, res) => {
-    
+const getProfileController = (req, res, mysqlConnection) => {
     const userId = req.query.userId;
-    
-    res.json({
-      id: userId,
-      name: 'Adityaa Ravi',
-      orgs: ['SacHacks', 'PayPal', 'Google DSC at UCD', 'UCD CS Tutoring Commitee'],
-      schools: ['University of California, Davis'],
-      career: ['Full Stack Development', 'Machine Learning', 'Hackathons'],
-      fun: ['Biking', 'Travel', 'Badminton'],
-      description: 'I am currently looking for an Software Engineering Internship for Spring 2023.' + 
-      ' Open to chat and connect!'
+    try{
+    mysqlConnection.connect((err) => {
+      if (err) throw err;
+      mysqlConnection.query("use visage_app;", (err) => {if (err) throw err;});
+      mysqlConnection.query('SELECT * FROM user_info WHERE userId = ?;', [userId], (err, result) => {
+        if (err) throw err;
+        res.json({
+          id: userId,
+          name: result[0].name,
+          orgs: [result[0].org1, result[0].org2, result[0].org3, result[0].org4],
+          schools: [result[0].school1, result[0].school2, result[0].school3],
+          career: [result[0].career1, result[0].career2, result[0].career3],
+          fun: [result[0].fun1, result[0].fun2, result[0].fun3],
+          description: result[0].description
+        });
+      });
     });
+  } catch (err) {
+    res.json(err);
+  }
+    
 };
 
 export default getProfileController;

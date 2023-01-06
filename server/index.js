@@ -13,6 +13,13 @@ import removeConnectionController from "./connections/removeConnectionController
 import declineSuggestionController from "./connections/declineSuggestionController.js";
 import acceptSuggestionController from "./connections/acceptSuggestionController.js";
 
+import mysql from 'mysql2';
+
+var connection = mysql.createConnection({
+    host: '127.0.0.1',
+    user: 'root',
+    // password: '',
+});
 
 const PORT = process.env.PORT || 3001;
 
@@ -27,40 +34,40 @@ app.get("/hello", (req, res) => {
 ////////////////////////////////// User info //////////////////////////////////
 
 // GET request for user stats
-app.get("/userStats/", userStatsController);
+app.get("/userStats/", (req, res) => userStatsController(req, res, connection));
 
 // GET request to get a user's profile
-app.get('/getProfile/', getProfileController);
+app.get('/getProfile/', (req, res) =>  getProfileController(req, res, connection));
 
 // POST request to create a user account --- NOT YET IMPLEMENTED ON THE FRONTEND
-app.post('/createUser', createUserController);
+app.post('/createUser', (req, res) => createUserController(req, res, connection));
 
 // POST request to update a user's profile --- NOT YET IMPLEMENTED ON THE FRONTEND
-app.post('/updateProfile', updateProfileController);
+app.post('/updateProfile', (req, res) => updateProfileController(req, res, connection));
 
 ////////////////////////////////// Messaging //////////////////////////////////
 // GET request for all the messages between two users
-app.get("/getMessages/", getMessagesController); 
+app.get("/getMessages/", (req, res) => getMessagesController(req, res, connection)); 
 
 // POST request to send a message to a user
-app.post('/sendMessage/', sendMessageController);
+app.post('/sendMessage/',(req, res) =>  sendMessageController(req, res, connection));
 
 ////////////////////////////////// Connections //////////////////////////////////
 // GET request for all the connections of a user
-app.get("/getExistingConnections/", getExistingConnectionsController);
+app.get("/getExistingConnections/", (req, res) =>  getExistingConnectionsController(req, res, connection));
 
 // GET request to the connection suggestions created by us for the user
-app.get('/getSuggestedConnections/', getSuggestedConnectionsController);
+app.get('/getSuggestedConnections/', (req, res) =>  getSuggestedConnectionsController(req, res, connection));
 
 // POST request to remove a connection
-app.post('/removeConnection/', removeConnectionController);
+app.post('/removeConnection/',(req, res) => removeConnectionController(req, res, connection));
 
 // POST request to decline a suggested connection
-app.post('/declineSuggestion/', declineSuggestionController);
+app.post('/declineSuggestion/',(req, res) => declineSuggestionController(req, res, connection));
 
 // POST request to accept a suggested connection
 /// Might not need an endpoint for this... If a person sends a message, the other person should automatically be considered a connection.
-app.post('/acceptSuggestion/', acceptSuggestionController);
+app.post('/acceptSuggestion/', (req, res) => acceptSuggestionController(req, res, connection));
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
