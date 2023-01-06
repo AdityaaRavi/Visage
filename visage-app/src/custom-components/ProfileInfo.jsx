@@ -11,26 +11,19 @@ function ProfileInfo(props){
         axios
            .get(`/getProfile/`, { params: {userId: props.id} })
            .then((response) => {
-                setProfile(response.data);
+                let data = response.data;
+                // removing null elements from arrays
+                data.orgs = data.orgs.filter((org) => org);
+                data.schools = data.schools.filter((school) => school);
+                data.career = data.career.filter((career) => career);
+                data.fun = data.fun.filter((fun) => fun);
+
+                setProfile(data);
            })
            .catch((err) => {
               console.log(err);
            });
      }, []);
-
-    // const profile = ((id) => {
-    //     /* AJAX request goes here*/
-    //     return({
-    //         id: id,
-    //         name: 'Adityaa Ravi',
-    //         orgs: ['SacHacks', 'PayPal', 'Google DSC at UCD', 'UCD CS Tutoring Commitee'],
-    //         schools: ['University of California, Davis'],
-    //         career: ['Full Stack Development', 'Machine Learning', 'Hackathons'],
-    //         fun: ['Biking', 'Travel', 'Badminton'],
-    //         description: 'I am currently looking for an Software Engineering Internship for Spring 2023.' + 
-    //         ' Open to chat and connect!',
-    //     })
-    // })(props.id)
 
   return (
     <div>
