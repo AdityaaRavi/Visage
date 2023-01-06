@@ -11,23 +11,38 @@ function Messages(props){
     const [messages, setMessages] = useState();
 
     useEffect(() => {
-        console.log('Messages useEffect');
+        //console.log("Messages refreshed")
         axios
-           .get(`/getMessages/`, { params: {userId: props.id, otherPersonId: props.otherPersonId} })
-           .then((response) => {
-                setMessages(response.data.messages);
-                setOtherPersonName(response.data.OtherPersonName);
-           })
-           .catch((err) => {
-              console.log(err);
-           });
+            .get(`/getMessages/`, { params: {userId: props.id, otherPersonId: props.otherPersonId} })
+            .then((response) => {
+                    setMessages(response.data.messages);
+                    setOtherPersonName(response.data.OtherPersonName);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
      }, [props.otherPersonId]);
-
+    //////// TODO: add code to refresh messages every 5 seconds 
+    //  useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         console.log("Messages refreshed")
+    //         axios
+    //         .get(`/getMessages/`, { params: {userId: props.id, otherPersonId: props.otherPersonId} })
+    //         .then((response) => {
+    //                 setMessages(response.data.messages);
+    //                 setOtherPersonName(response.data.OtherPersonName);
+    //         })
+    //         .catch((err) => {
+    //             console.log(err);
+    //         });
+    //     }, 5000);
+    //     return () => clearInterval(interval);
+    // },[]);
   return (
     <div>
         <h2 className='messagesHeader'>{OtherPersonName}</h2>
         <div className='messagesContainer'>
-            {messages && (messages.map((message) => (Number(message.sender) === props.id) ? <p className='messages sentMessages'>{message.message}</p> : <p className='messages recievedMessages'>{message.message}</p>).reverse())}
+            {messages && (messages.map((message) => (Number(message.sender_userID) === props.id) ? <p className='messages sentMessages'>{message.message}</p> : <p className='messages recievedMessages'>{message.message}</p>).reverse())}
         </div>
         
         <MessagesInputBox id={props.id} otherPersonId={props.otherPersonId} messages={messages} setMessages={setMessages}/>

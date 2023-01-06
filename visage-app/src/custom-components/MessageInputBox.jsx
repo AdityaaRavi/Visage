@@ -26,7 +26,7 @@ function MessagesInputBox(props){
             
             // Update messages in parent component (iff inside Messages.jsx)
             if(props.messages){
-                props.setMessages(props.messages.concat({sender: props.id, message: message}));
+                props.setMessages(props.messages.concat({sender_userID: props.id, message: message}));
             }
 
             setMessage('');
