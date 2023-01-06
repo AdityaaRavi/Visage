@@ -20,6 +20,7 @@ var connection = mysql.createConnection({
     user: 'root',
     // password: '',
 });
+connection.connect((err) => {if (err) throw err});
 
 const PORT = process.env.PORT || 3001;
 

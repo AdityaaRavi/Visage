@@ -1,9 +1,8 @@
 const getProfileController = (req, res, mysqlConnection) => {
     const userId = req.query.userId;
     try{
-    mysqlConnection.connect((err) => {
-      if (err) throw err;
       mysqlConnection.query("use visage_app;", (err) => {if (err) throw err;});
+      
       mysqlConnection.query('SELECT * FROM user_info WHERE userId = ?;', [userId], (err, result) => {
         if (err) throw err;
         res.json({
@@ -16,7 +15,7 @@ const getProfileController = (req, res, mysqlConnection) => {
           description: result[0].description
         });
       });
-    });
+      
   } catch (err) {
     res.json(err);
   }
