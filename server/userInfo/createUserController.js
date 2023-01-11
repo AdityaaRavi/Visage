@@ -2,7 +2,6 @@ const createUserController = (req, res, mysqlConnection) => {
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
-    let userId = Math.floor(Math.random() * 2147483647);
     
     let topSkills = req.body.topSkills;
     
@@ -24,9 +23,12 @@ const createUserController = (req, res, mysqlConnection) => {
       // Create user
       mysqlConnection.query("use visage_app;", (err) => {if (err) throw err;});
 
-      mysqlConnection.query('SELECT name FROM user_login WHERE userId = ?;', [userId], (err, lis) => {
+      mysqlConnection.query('SELECT userId FROM user_login;', (err, lis) => {
         if (err) throw err;
-        if (lis.length > 0) userId = Math.floor(Math.random() * 2147483647);
+        // Makes sure userID is unique. This does employ a full table scan though, which is not ideal at scale. This shouldn't cause any problems
+        //// in this application though.
+        let userId = Math.floor(Math.random() * 2147483647);
+        while(lis.includes(userId)) userId = Math.floor(Math.random() * 2147483647);
 
         mysqlConnection.query('SELECT name FROM user_login WHERE email = ?;', [email], (err, lis) => {
           if (err) throw err;
