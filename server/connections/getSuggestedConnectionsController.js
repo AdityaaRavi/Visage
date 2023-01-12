@@ -8,7 +8,6 @@ const getSuggestedConnectionsController = (req, res, mysqlConnection) => {
       let connectionsString = connections.join(' OR userId = ');
 
       mysqlConnection.query(`SELECT * FROM user_info WHERE userId = ${connectionsString};`, (err, result) => {
-        console.log(result);
         if (err) throw err;
         let connectionsInfo = result.map((result) => {return {
           id: result.userId,

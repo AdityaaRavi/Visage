@@ -13,7 +13,7 @@ function MessagesPage(props){
     /* AJAX call to remove connection */
     axios.post('/removeConnection', {userId: props.id, otherPersonId: otherPersonId})
          .then((response) => {
-            console.log(response.data);
+            //console.log(response.data);
             setOtherPerson(-1);
           });         
   }

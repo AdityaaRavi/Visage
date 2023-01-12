@@ -35,7 +35,7 @@ function MessagesInputBox(props){
             setMessage('');
             setCharCount(0);
             setFormError(true);
-            console.log(`Message sent! from ${props.id} to ${props.otherPersonId}: ${message}`);
+            //(`Message sent! from ${props.id} to ${props.otherPersonId}: ${message}`);
         } catch (err) {
             console.log(err);
         }
