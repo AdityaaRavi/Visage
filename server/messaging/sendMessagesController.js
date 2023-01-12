@@ -27,6 +27,8 @@ const sendMessageController = (req, res, mysqlConnection) => {
               mysqlConnection.query('UPDATE suggested_connections SET pending=false, accepted=true WHERE (lower_userID=? AND higher_userID=?) OR (lower_userID=? AND higher_userID=?);', [senderId, recepientId, recepientId, senderId], (err, result) => {
                 if (err) throw err;
               });
+              // and also change the number of connections field for both the users
+              mysqlConnection.query('UPDATE user_info SET num_connections=num_connections+1 WHERE userID=? OR userID=?;', [senderId, recepientId], (err, result) => {if (err) throw err;});
             });
           });
         }
