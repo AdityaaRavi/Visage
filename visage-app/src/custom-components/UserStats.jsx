@@ -16,7 +16,7 @@ function UserStats(props){
            .catch((err) => {
               console.log(err);
            });
-     }, []);
+     }, [[props.id]]);
 
   return (
     <div class='allStatsDisplay'>

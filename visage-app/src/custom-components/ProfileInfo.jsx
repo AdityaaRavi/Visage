@@ -23,7 +23,7 @@ function ProfileInfo(props){
            .catch((err) => {
               console.log(err);
            });
-     }, []);
+     }, [props.id]);
 
   return (
     <div>

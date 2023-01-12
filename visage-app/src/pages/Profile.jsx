@@ -17,7 +17,7 @@ function Profile(props){
         {!props.inConnectionPage && <Button variant="dark" class="editButton" href='/editProfile'>Edit Profile</Button>}
         <hr size="1" width={lineWidth} className={lineClass} color="black"/> 
         <div className={lineClass}>
-          <UserStats inConnectionPage={props.inConnectionPage} id={6}/>
+          <UserStats inConnectionPage={props.inConnectionPage} id={props.id}/>
         </div>
     </div>
 
