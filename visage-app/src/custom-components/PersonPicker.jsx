@@ -6,7 +6,7 @@ import Badge from 'react-bootstrap/Badge';
 import axios from 'axios';
 
 function PersonPicker(props){
-
+    console.log(props);
     const [connections, setConnections] = useState([]);
 
     useEffect(() => {
@@ -15,6 +15,8 @@ function PersonPicker(props){
             .get(`/getSuggestedConnections/`, { params: {userId: props.id} })
             .then((response) => {
                 setConnections(response.data);
+                if(props.otherPersonId === -1 || props.otherPersonId === props.id) props.picker(connections[0].id);
+    
             })
             .catch((err) => {
                 console.log(err);
@@ -24,12 +26,13 @@ function PersonPicker(props){
             .get(`/getExistingConnections/`, { params: {userId: props.id} })
             .then((response) => {
                 setConnections(response.data);
+                if(props.otherPersonId === -1 || props.otherPersonId === props.id) props.picker(connections[0].id);
             })
             .catch((err) => {
                 console.log(err);
             });
         }
-        if(props.otherPersonId === -1) props.picker(connections[0].id);
+        //if(connections.length > 0 && (props.otherPersonId === -1 || props.otherPersonId === props.id)) props.picker(connections[0].id);
     
     }, [props.otherPersonId]);
 

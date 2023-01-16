@@ -6,8 +6,8 @@ import { Button } from 'react-bootstrap';
 import axios from 'axios';
 
 function MessagesPage(props){
-  
-  const [otherPersonId, setOtherPerson] = useState(2);
+
+  const [otherPersonId, setOtherPerson] = useState(props.id);
 
   const onRemoveConnectionButtonClick = (e) => {
     /* AJAX call to remove connection */
