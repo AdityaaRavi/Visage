@@ -27,7 +27,7 @@ function ConnectPage(props){
       </div>
       <div class='VerticalDivider'></div>
         <div class='messageHolderLvl2'>
-          <Profile id={otherPersonId} inConnectionPage={true}/>
+          <Profile id={otherPersonId != -1 ? otherPersonId : props.id} inConnectionPage={true}/>
           {/* id is to identify the current user, person 
           is to identify the person at the other end of the conversation */}
           <div>Start a conversation:</div>

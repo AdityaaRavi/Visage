@@ -1,5 +1,7 @@
 const getProfileController = (req, res, mysqlConnection) => {
     const userId = req.query.userId;
+    //console.log(`User ID: ${userId}`);
+    if(userId < 0) res.error("Invalid user ID");
     try{
       mysqlConnection.query("use visage_app;", (err) => {if (err) throw err;});
       
@@ -18,6 +20,7 @@ const getProfileController = (req, res, mysqlConnection) => {
       
   } catch (err) {
     res.json(err);
+    console.log(err);
   }
     
 };
