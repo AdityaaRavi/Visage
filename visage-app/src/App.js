@@ -12,7 +12,7 @@ import EditProfile from './pages/EditProfile';
 
 function App() {
   /* enivornment variable for the current user */
-  const [id, setId] = useState(6);
+  const [id, setId] = useState(2);
   return (
     <div className="App">
       <header>

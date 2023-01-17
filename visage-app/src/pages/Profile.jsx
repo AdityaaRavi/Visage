@@ -10,8 +10,13 @@ function Profile(props){
   let lineClass = '';
   if(props.inConnectionPage) lineClass = 'halfPageComponent';
 
+  // const onChange = (e) => {
+  //   props.setId(e.target.value);
+  // }
+
   return (
     <div>
+        {/* <textarea class="devOnly" rows="4" cols="50" value={props.id} readOnly></textarea> */}
         <ProfileWhole className='profileDisplay' inConnectionPage={props.inConnectionPage} id={props.id}/>
         <br />
         {!props.inConnectionPage && <Button variant="dark" class="editButton" href='/editProfile'>Edit Profile</Button>}
@@ -19,6 +24,9 @@ function Profile(props){
         <div className={lineClass}>
           <UserStats inConnectionPage={props.inConnectionPage} id={props.id}/>
         </div>
+        {/* <textarea class="devOnly" value={props.id} onChange={onChange}/>
+        <div class="devOnly">{props.setId}</div> */}
+        
     </div>
 
    );
