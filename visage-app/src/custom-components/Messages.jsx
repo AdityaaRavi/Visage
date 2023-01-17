@@ -9,36 +9,42 @@ function Messages(props){
 
     const [OtherPersonName, setOtherPersonName] = useState();
     const [messages, setMessages] = useState();
+    const [refresh, setRefresh] = useState(false);
 
-    useEffect(() => {
-        //console.log("Messages refreshed")
+    function refreshMessages(){
         axios
             .get(`/getMessages/`, { params: {userId: props.id, otherPersonId: props.otherPersonId} })
             .then((response) => {
+                if(response.data.messages !== messages || response.data.OtherPersonName !== OtherPersonName){
                     setMessages(response.data.messages);
                     setOtherPersonName(response.data.OtherPersonName);
+                }
             })
             .catch((err) => {
                 console.log(err);
             });
+    }
+
+    useEffect(() => {
+        console.log("Messages refreshed due to new otherPersonId")
+        refreshMessages();
      }, [props.otherPersonId]);
-    //////// TODO: add code to refresh messages every 5 seconds 
-    //  useEffect(() => {
-    //     const interval = setInterval(() => {
-    //         console.log("Messages refreshed")
-    //         axios
-    //         .get(`/getMessages/`, { params: {userId: props.id, otherPersonId: props.otherPersonId} })
-    //         .then((response) => {
-    //                 setMessages(response.data.messages);
-    //                 setOtherPersonName(response.data.OtherPersonName);
-    //         })
-    //         .catch((err) => {
-    //             console.log(err);
-    //         });
-    //     }, 5000);
-    //     return () => clearInterval(interval);
-    // },[]);
-  return (
+
+    // This will initiate refresh every 10 seconds
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setRefresh(true);
+        }, 10000);
+        return () => clearInterval(interval);
+    },[]);
+    // This will actually refresh the messages and reset the refresh timer.
+    if(refresh){
+        setRefresh(false);
+        console.log("Messages refreshed due to refresh timer")
+        refreshMessages();
+    }
+  
+    return (
     <div>
         <h2 className='messagesHeader'>{OtherPersonName}</h2>
         <div className='messagesContainer'>
