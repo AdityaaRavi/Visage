@@ -34,41 +34,41 @@ app.get("/hello", (req, res) => {
 });
 ////////////////////////////////// User info //////////////////////////////////
 
-// GET request for user stats
+// GET request for user stats (++ connected to the database)
 app.get("/userStats/", (req, res) => userStatsController(req, res, connection));
 
-// GET request to get a user's profile
+// GET request to get a user's profile (++ connected to the database)
 app.get('/getProfile/', (req, res) =>  getProfileController(req, res, connection));
 
-// POST request to create a user account --- NOT YET IMPLEMENTED ON THE FRONTEND
+// POST request to create a user account --- NOT YET IMPLEMENTED ON THE FRONTEND (++ connected to the database)
 app.post('/createUser', (req, res) => createUserController(req, res, connection));
 
-// POST request to update a user's profile --- NOT YET IMPLEMENTED ON THE FRONTEND
+// POST request to update a user's profile --- NOT YET IMPLEMENTED ON THE FRONTEND (++ connected to the database)
 app.post('/updateProfile', (req, res) => updateProfileController(req, res, connection));
 
 ////////////////////////////////// Messaging //////////////////////////////////
-// GET request for all the messages between two users
+// GET request for all the messages between two users (++ connected to the database)
 app.get("/getMessages/", (req, res) => getMessagesController(req, res, connection)); 
 
-// POST request to send a message to a user
+// POST request to send a message to a user (++ connected to the database)
 app.post('/sendMessage/',(req, res) =>  sendMessageController(req, res, connection));
 
 ////////////////////////////////// Connections //////////////////////////////////
-// GET request for all the connections of a user
+// GET request for all the connections of a user  (++ connected to the database)
 app.get("/getExistingConnections/", (req, res) =>  getExistingConnectionsController(req, res, connection));
 
-// GET request to the connection suggestions created by us for the user
+// GET request to the connection suggestions created by us for the user (++ connected to the database)
 app.get('/getSuggestedConnections/', (req, res) =>  getSuggestedConnectionsController(req, res, connection));
 
-// POST request to remove a connection
+// POST request to remove a connection (++ connected to the database)
 app.post('/removeConnection/',(req, res) => removeConnectionController(req, res, connection));
 
-// POST request to decline a suggested connection
+// POST request to decline a suggested connection (++ connected to the database)
 app.post('/declineSuggestion/',(req, res) => declineSuggestionController(req, res, connection));
 
-// POST request to accept a suggested connection
-/// Might not need an endpoint for this... If a person sends a message, the other person should automatically be considered a connection.
-app.post('/acceptSuggestion/', (req, res) => acceptSuggestionController(req, res, connection));
+// // POST request to accept a suggested connection
+// /// Might not need an endpoint for this... If a person sends a message, the other person should automatically be considered a connection.
+// app.post('/acceptSuggestion/', (req, res) => acceptSuggestionController(req, res, connection));
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);

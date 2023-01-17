@@ -6,7 +6,6 @@ import Badge from 'react-bootstrap/Badge';
 import axios from 'axios';
 
 function PersonPicker(props){
-    console.log(props);
     const [connections, setConnections] = useState([]);
 
     useEffect(() => {

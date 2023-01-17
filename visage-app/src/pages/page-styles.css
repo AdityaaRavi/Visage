@@ -50,6 +50,13 @@
     align-items: center;
 }
 
+/******************************* Dev mode toggle ****/
+.devOnly{
+    visibility: hidden;
+}
+/******************************* Dev mode toggle ****/
+
+
 @media (max-width: 996px) {
     div{
         align-items: center;

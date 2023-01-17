@@ -26,7 +26,7 @@ function Messages(props){
     }
 
     useEffect(() => {
-        console.log("Messages refreshed due to new otherPersonId")
+        //console.log("Messages refreshed due to new otherPersonId")
         refreshMessages();
      }, [props.otherPersonId]);
 
@@ -40,7 +40,7 @@ function Messages(props){
     // This will actually refresh the messages and reset the refresh timer.
     if(refresh){
         setRefresh(false);
-        console.log("Messages refreshed due to refresh timer")
+        //console.log("Messages refreshed due to refresh timer")
         refreshMessages();
     }
   
