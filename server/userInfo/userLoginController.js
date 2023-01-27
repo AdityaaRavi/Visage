@@ -6,12 +6,15 @@ const userLoginController = (req, res, mysqlConnection) => {
     try{
       // Create user
       mysqlConnection.query("use visage_app;", (err) => {if (err) throw err;});
-      mysqlConnection.query('SELECT userId FROM user_login WHERE email=? AND password=?;',(email, password) , (err, lis) => {
-        if(err) throw err;
-        if(lis.length == 0) res.json({error: "Email or password is incorrect!"});
-        res.json({message: "Login successful!", userId: lis[0].userId });
 
-        // // create a sessionId for the user and store it in the database
+      mysqlConnection.query("SELECT userId FROM user_login WHERE email = ?;", (email), (err, lis) => {
+        if(err) throw err;
+        lis = lis.filter((user) => user.password == password);
+        if(lis.length === 0) res.json({error: "Email or password is incorrect!"});
+        else{
+          res.json({message: "success", userId: lis[0].userId});
+
+          // // create a sessionId for the user and store it in the database
         // // return the sessionId to the user
         // mysqlConnection.query('SELECT sessionId FROM sessionsTable;', (err, lis2) => {
         //   if (err) throw err;
@@ -24,6 +27,7 @@ const userLoginController = (req, res, mysqlConnection) => {
         //     res.json({message: "Login successful!", sessionId: sessionId });
         //   });
         // });
+        }
       });
     } catch (err) {
       console.log(err);
