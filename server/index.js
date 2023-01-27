@@ -12,6 +12,7 @@ import getSuggestedConnectionsController from "./connections/getSuggestedConnect
 import removeConnectionController from "./connections/removeConnectionController.js";
 import declineSuggestionController from "./connections/declineSuggestionController.js";
 import acceptSuggestionController from "./connections/acceptSuggestionController.js";
+import userLoginController from "./userInfo/userLoginController.js";
 
 import mysql from 'mysql2';
 
@@ -45,6 +46,9 @@ app.post('/createUser', (req, res) => createUserController(req, res, connection)
 
 // POST request to update a user's profile --- NOT YET IMPLEMENTED ON THE FRONTEND (++ connected to the database)
 app.post('/updateProfile', (req, res) => updateProfileController(req, res, connection));
+
+// POST request to login a user --- NOT YET IMPLEMENTED ON THE FRONTEND (++ connected to the database)
+app.post('/login', (req, res) => userLoginController(req, res, connection));
 
 ////////////////////////////////// Messaging //////////////////////////////////
 // GET request for all the messages between two users (++ connected to the database)
