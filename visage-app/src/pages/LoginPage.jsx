@@ -3,46 +3,55 @@ import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import { MDBInput, MDBRow, MDBCol } from 'mdb-react-ui-kit';
+import { useNavigate } from "react-router-dom";
 
 function LoginPage(props){
-    // const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
-    // const [incorrectLogin, setIncorrectLogin] = useState(false);
-    // const [emailError, setEmailError] = useState(true);
-    // const [passwordError, setPasswordError] = useState(true);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [incorrectLogin, setIncorrectLogin] = useState(false);
+    const [emailError, setEmailError] = useState(true);
+    const [passwordError, setPasswordError] = useState(true);
 
-    // const onChangeEmail = (e) => {
-    //     setEmail(e.target.value);
-    //     if(e.target.value === ''){
-    //         setEmailError(true);
-    //     }else{
-    //         setEmailError(false);
-    //     }
-    // }
+    const navigate = useNavigate();
 
-    // const onChangePassword = (e) => {
-    //     setPassword(e.target.value);
-    //     if(e.target.value === ''){
-    //         setPasswordError(true);
-    //     }else{
-    //         setPasswordError(false);
-    //     }
-    // }
+    const onChangeEmail = (e) => {
+        setEmail(e.target.value);
+        if(e.target.value === ''){
+            setEmailError(true);
+        }else{
+            setEmailError(false);
+        }
+    }
 
-    // const onLoginClick = (e) => {
-    //     axios.post('/login', {email: email, password: password})
-    //         .then((response) => {
-    //             console.log(response);
-    //             if(response.data.message === 'success'){
-    //                 props.setId(response.data.userId);
-    //                 setIncorrectLogin(false);
-    //             }
-    //             else setIncorrectLogin(true);
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         });
-    // }
+    const onChangePassword = (e) => {
+        setPassword(e.target.value);
+        if(e.target.value === ''){
+            setPasswordError(true);
+        }else{
+            setPasswordError(false);
+        }
+    }
+
+    const onLoginClick = (e) => {
+        axios.post('/login', {email: email, password: password})
+            .then((response) => {
+                console.log(response);
+                if(response.data.message === 'success'){
+                    //dispatch(login(response.data.userId))
+                    localStorage.setItem('userId', response.data.userId)
+                    setIncorrectLogin(false);
+                    // Redirect to home page
+                    navigate("/profile");
+                    window.location.reload();
+
+
+                }
+                else setIncorrectLogin(true);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
     return (
         <div className="login-page">
             <div className="login-page-content">
@@ -51,16 +60,16 @@ function LoginPage(props){
                 </div>
                 <div className="login-page-form">
                     <div className="login-page-form-input">
-                        <input type="text" placeholder="Email" onChange={props.onChangeEmail}></input>
+                        <input type="text" placeholder="Email" onChange={onChangeEmail}></input>
                     </div>
                     <div className="login-page-form-input">
-                        <input type="password" placeholder="Password" onChange={props.onChangePassword}></input>
+                        <input type="password" placeholder="Password" onChange={onChangePassword}></input>
                     </div>
-                    <Button variant="primary" type="submit" onClick={props.onLoginClick} disabled={props.emailError || props.passwordError}>
+                    <Button variant="primary" type="submit" onClick={onLoginClick} disabled={emailError || passwordError}>
                         Login
                     </Button>
-                    {props.incorrectLogin && <p style={{color: 'red'}}>Incorrect email or password</p>}
-                    {(props.emailError || props.passwordError) && <p style={{color: 'red'}}>Please fill out all fields</p>}
+                    {incorrectLogin && <p style={{color: 'red'}}>Incorrect email or password</p>}
+                    {(emailError || passwordError) && <p style={{color: 'red'}}>Please fill out all fields</p>}
                 </div>
             </div>
         </div>

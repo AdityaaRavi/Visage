@@ -9,7 +9,7 @@ function Profile(props){
   // if(props.inConnectionPage) lineWidth = '50%';
   let lineClass = '';
   if(props.inConnectionPage) lineClass = 'halfPageComponent';
-
+  
   // const onChange = (e) => {
   //   props.setId(e.target.value);
   // }

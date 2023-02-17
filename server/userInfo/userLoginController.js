@@ -7,7 +7,7 @@ const userLoginController = (req, res, mysqlConnection) => {
       // Create user
       mysqlConnection.query("use visage_app;", (err) => {if (err) throw err;});
 
-      mysqlConnection.query("SELECT userId FROM user_login WHERE email = ?;", (email), (err, lis) => {
+      mysqlConnection.query("SELECT userId, password FROM user_login WHERE email = ?;", (email), (err, lis) => {
         if(err) throw err;
         lis = lis.filter((user) => user.password == password);
         if(lis.length === 0) res.json({error: "Email or password is incorrect!"});
