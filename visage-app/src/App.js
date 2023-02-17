@@ -59,11 +59,11 @@ function App() {
   //             console.log(error);
   //         });
   // }
-
+  
   return (
     <div className="App">
       <header>
-        {id !== -1 && <TitleBar />}
+        {localStorage.getItem("userId") && <TitleBar />}
       </header>
       <body className='allContent'>
       <BrowserRouter>
@@ -79,19 +79,19 @@ function App() {
               So might as well learn and use it here.
             */}
 
-            <Route path="/" element={id === -1 ? <LoginPage /> : <Profile id={id}/>} 
+            <Route path="/" element={!localStorage.getItem("userId") ? <LoginPage /> : <Profile id={localStorage.getItem("userId")}/>} 
             />
             {/* If not logged in, only the login component should be shown regardless of path */}
-            <Route path="/profile" element={id === -1 ? <LoginPage /> : <Profile id={id}/>} 
+            <Route path="/profile" element={!localStorage.getItem("userId") ? <LoginPage /> : <Profile id={localStorage.getItem("userId")}/>} 
             />
 
-            <Route path="/messages" element={id === -1 ? <LoginPage /> : <MessagesPage id={id}/>} />
+            <Route path="/messages" element={!localStorage.getItem("userId") ? <LoginPage /> : <MessagesPage />} />
 
-            <Route path="/connect" element={id === -1 ? <LoginPage /> : <ConnectPage id={id}/>} />
+            <Route path="/connect" element={!localStorage.getItem("userId") ? <LoginPage /> : <ConnectPage id={localStorage.getItem("userId")}/>} />
 
-            <Route path="/settings" element={id === -1 ? <LoginPage /> :  <Settings id={id}/>} />
+            <Route path="/settings" element={!localStorage.getItem("userId") ? <LoginPage /> :  <Settings id={localStorage.getItem("userId")}/>} />
 
-            <Route path="/editProfile" element={id === -1 ? <LoginPage /> : <Settings id={id}/>/*<EditProfile id={id}/>*/} />   
+            <Route path="/editProfile" element={!localStorage.getItem("userId") ? <LoginPage /> : <Settings id={localStorage.getItem("userId")}/>} />   
         </Routes>
       </BrowserRouter> 
       </body>

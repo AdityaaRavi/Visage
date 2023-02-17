@@ -39,6 +39,7 @@ function LoginPage(props){
                 console.log(response);
                 if(response.data.message === 'success'){
                     dispatch(login(response.data.userId))
+                    localStorage.setItem('userId', response.data.userId)
                     setIncorrectLogin(false);
                 }
                 else setIncorrectLogin(true);
