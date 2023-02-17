@@ -4,12 +4,11 @@ import { useState, useEffect } from 'react';
 import Messages from '../custom-components/Messages';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
-import { useSelector, useDispatch } from 'react-redux'
-//import { login, logOut } from '../redux-slices/userIdSlice'
+
 
 function MessagesPage(props){
 
-  const id = localStorage.getItem("userId");//useSelector((state) => state.userId.value)
+  const id = localStorage.getItem("userId");
   const [otherPersonId, setOtherPerson] = useState(id);
   
 

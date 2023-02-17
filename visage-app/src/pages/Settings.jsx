@@ -2,8 +2,7 @@ import './page-styles.css';
 // import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 // import axios from 'axios';
-// import { useSelector, useDispatch } from 'react-redux'
-// import { login, logOut } from '../redux-slices/userIdSlice'
+
 
 function Settings(){
 

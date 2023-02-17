@@ -3,17 +3,16 @@ import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import { MDBInput, MDBRow, MDBCol } from 'mdb-react-ui-kit';
-import { useSelector, useDispatch } from 'react-redux'
-import { login, logOut } from '../redux-slices/userIdSlice'
+import { useNavigate } from "react-router-dom";
 
 function LoginPage(props){
-    const id = useSelector((state) => state.userId.value)
-    const dispatch = useDispatch()
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [incorrectLogin, setIncorrectLogin] = useState(false);
     const [emailError, setEmailError] = useState(true);
     const [passwordError, setPasswordError] = useState(true);
+
+    const navigate = useNavigate();
 
     const onChangeEmail = (e) => {
         setEmail(e.target.value);
@@ -38,9 +37,14 @@ function LoginPage(props){
             .then((response) => {
                 console.log(response);
                 if(response.data.message === 'success'){
-                    dispatch(login(response.data.userId))
+                    //dispatch(login(response.data.userId))
                     localStorage.setItem('userId', response.data.userId)
                     setIncorrectLogin(false);
+                    // Redirect to home page
+                    navigate("/profile");
+                    window.location.reload();
+
+
                 }
                 else setIncorrectLogin(true);
             })
