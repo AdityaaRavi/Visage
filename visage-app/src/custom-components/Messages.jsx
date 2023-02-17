@@ -48,9 +48,9 @@ function Messages(props){
     <div>
         <h2 className='messagesHeader'>{OtherPersonName}</h2>
         <div className='messagesContainer'>
-            {messages && (messages.map((message) => (Number(message.sender_userID) === props.id) ? <p className='messages sentMessages'>{message.message}</p> : <p className='messages recievedMessages'>{message.message}</p>).reverse())}
+            {/* Note that props.id is a string! so Use "==" to compare and not "===" */}
+            {messages && (messages.map((message) => (Number(message.sender_userID) == props.id) ? <p className='messages sentMessages'>{message.message}</p> : <p className='messages recievedMessages'>{message.message}</p>).reverse())}
         </div>
-        
         <MessagesInputBox id={props.id} otherPersonId={props.otherPersonId} messages={messages} setMessages={setMessages}/>
 
         <div className='devOnly'>{props.otherPersonId}</div>
