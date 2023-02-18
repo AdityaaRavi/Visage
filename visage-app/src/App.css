@@ -15,6 +15,12 @@
   
 }
 
+body{
+  margin: 0;
+  padding: 0;
+  background-image: none;
+}
+
 .App-link {
   color: #61dafb;
 }

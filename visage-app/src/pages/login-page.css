@@ -1,0 +1,39 @@
+.login{
+    max-width: 50vw;
+}
+
+.whyVisage{
+    /* margin-top: -20px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: small;
+    margin-right: 4em;
+    margin-left: 4em;
+}
+
+.whyVisageText{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+hr{
+    visibility: hidden;
+}
+
+@media (max-width: 996px) {
+    /* .login-page{
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        min-width: 500px;
+    } */
+    hr{
+        visibility: visible;
+    }
+    .whyVisage{
+        margin-top: 20px;
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
