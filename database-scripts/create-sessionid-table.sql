@@ -3,7 +3,6 @@ use `visage_app`;
 CREATE TABLE `sessionsTable` (
 	`userId` INT unsigned NOT NULL,
     `sessionId` INT unsigned NOT NULL,
-	`isSession` BOOLEAN NOT NULL,
     `timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`sessionId`)
 );
