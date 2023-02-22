@@ -9,14 +9,24 @@ import axios from 'axios';
 function MessagesPage(props){
 
   const id = localStorage.getItem("userId");
+  const session = localStorage.getItem("sessionId");
   const [otherPersonId, setOtherPerson] = useState(id);
   
 
   const onRemoveConnectionButtonClick = (e) => {
 
     /* AJAX call to remove connection */
-    axios.post('/removeConnection', {userId: id, otherPersonId: otherPersonId})
+    axios.post('/removeConnection', {userId: id, otherPersonId: otherPersonId, session: session})
          .then((response) => {
+            // if not logged in, redirect to login page
+            if (response.data === 'Not logged in') {
+              console.log('Not logged in');
+              // clear user Id and session Id from local storage and redirect to login page
+              localStorage.removeItem('userId');
+              localStorage.removeItem('sessionId');
+              window.location.href = '/';
+              return;
+            }
             //console.log(response.data);
             setOtherPerson(-1);
           });         
@@ -26,13 +36,14 @@ function MessagesPage(props){
     <div id='MessagesPage'>
       <div class='personPicker'>
         <h1>Current Connections</h1>
-        <PersonPicker className='personPickerComponent' id={id} picker={setOtherPerson} otherPersonId={otherPersonId} getNew={false}/>
+        <PersonPicker className='personPickerComponent' id={id} picker={setOtherPerson} otherPersonId={otherPersonId} getNew={false} session={session}/>
       </div>
       <div class='VerticalDivider'></div>
+      {otherPersonId !== id ?
         <div class='messageHolderLvl2'>
           {/* id is to identify the current user, person 
           is to identify the person at the other end of the conversation */}
-          <Messages id={id} otherPersonId={otherPersonId} />
+          <Messages id={id} otherPersonId={otherPersonId} session={session}/>
           <div>
             <Button variant='primary' 
             className='removeConnectionButton'
@@ -40,7 +51,10 @@ function MessagesPage(props){
               Remove Connection
             </Button>
           </div>
-        </div>
+        </div> :
+        <div>
+          <h1 class='noConnectionMessage'>Select a connection to start messaging</h1>
+        </div>}
     </div>
     );
 }
