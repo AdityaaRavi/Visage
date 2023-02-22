@@ -47,6 +47,7 @@ function LoginPage(props){
                 if(response.data.message === 'success'){
                     //dispatch(login(response.data.userId))
                     localStorage.setItem('userId', response.data.userId)
+                    localStorage.setItem('sessionId', response.data.sessionId)
                     setIncorrectLogin(false);
                     // Redirect to home page
                     navigate("/profile");
@@ -62,7 +63,7 @@ function LoginPage(props){
     }
     // If user is already logged in, redirect to profile page
     useEffect(() => {
-        if(localStorage.getItem('userId') !== null){
+        if(localStorage.getItem('sessionId') !== null){
             navigate("/profile");
             window.location.reload();
         }
