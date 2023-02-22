@@ -23,7 +23,7 @@ function ProfileWhole(props){
                     id='profile-pic'
                     alt='...'
                 />
-                <ProfileInfo id={props.id}/>
+                <ProfileInfo id={props.id} session={props.session}/>
             </div>
             
         </div>

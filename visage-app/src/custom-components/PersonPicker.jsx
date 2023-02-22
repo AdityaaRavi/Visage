@@ -11,8 +11,17 @@ function PersonPicker(props){
     useEffect(() => {
         if(props.getNew){
             axios
-            .get(`/getSuggestedConnections/`, { params: {userId: props.id} })
+            .get(`/getSuggestedConnections/`, { params: {userId: props.id, session: props.session} })
             .then((response) => {
+                // if not logged in, redirect to login page
+                if (response.data === 'no_session_found') {
+                    console.log('Not logged in');
+                    // clear user Id and session Id from local storage and redirect to login page
+                    localStorage.removeItem('userId');
+                    localStorage.removeItem('sessionId');
+                    window.location.href = '/';
+                    return;
+                }
                 setConnections(response.data);
                 if(props.otherPersonId === -1 || props.otherPersonId === props.id) props.picker(connections[0].id);
     
@@ -22,8 +31,17 @@ function PersonPicker(props){
             });
         }else{
             axios
-            .get(`/getExistingConnections/`, { params: {userId: props.id} })
+            .get(`/getExistingConnections/`, { params: {userId: props.id, session: props.session} })
             .then((response) => {
+                // if not logged in, redirect to login page
+                if (response.data === 'no_session_found') {
+                    console.log('Not logged in');
+                    // clear user Id and session Id from local storage and redirect to login page
+                    localStorage.removeItem('userId');
+                    localStorage.removeItem('sessionId');
+                    window.location.href = '/';
+                    return;
+                }
                 setConnections(response.data);
                 if(props.otherPersonId === -1 || props.otherPersonId === props.id) props.picker(connections[0].id);
             })

@@ -17,12 +17,13 @@ function Profile(props){
   return (
     <div>
         {/* <textarea class="devOnly" rows="4" cols="50" value={props.id} readOnly></textarea> */}
-        <ProfileWhole className='profileDisplay' inConnectionPage={props.inConnectionPage} id={props.id}/>
+        <ProfileWhole className='profileDisplay' inConnectionPage={props.inConnectionPage} id={props.id} session={props.session}/>
         <br />
-        {!props.inConnectionPage && <Button variant="dark" class="editButton" href='/editProfile'>Edit Profile</Button>}
+        {/* If you are in the connection page or not logged in, don't show the edit profile button*/}
+        {!props.inConnectionPage && localStorage.getItem("sessionId") !== null && <Button variant="dark" class="editButton" href='/editProfile'>Edit Profile</Button>}
         <hr size="1" width={lineWidth} className={lineClass} color="black"/> 
         <div className={lineClass}>
-          <UserStats inConnectionPage={props.inConnectionPage} id={props.id}/>
+          <UserStats inConnectionPage={props.inConnectionPage} id={props.id} session={props.session}/>
         </div>
         {/* <textarea class="devOnly" value={props.id} onChange={onChange}/>
         <div class="devOnly">{props.setId}</div> */}

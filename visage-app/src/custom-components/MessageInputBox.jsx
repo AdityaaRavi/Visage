@@ -21,8 +21,19 @@ function MessagesInputBox(props){
     const sendMessage = () => {
         /* AJAX request to send message to server goes here*/
         try{
-            axios.post('/sendMessage', {userId: props.id, otherPersonId: props.otherPersonId, message: message})
-                 .then((response) => {console.log(response.data)});
+            axios.post('/sendMessage', {userId: props.id, otherPersonId: props.otherPersonId, message: message, session: props.session})
+                .then((response) => {
+                    console.log(response.data)
+                    // if not logged in, redirect to login page
+                    if (response.data === 'no_session_found') {
+                        console.log('Not logged in');
+                        // clear user Id and session Id from local storage and redirect to login page
+                        localStorage.removeItem('userId');
+                        localStorage.removeItem('sessionId');
+                        window.location.href = '/';
+                        return;
+                    }
+                });
             
             // Update messages in parent component (iff inside Messages.jsx)
             /////// We are directly editing the the message display component instead of sending a get request to get the most recent

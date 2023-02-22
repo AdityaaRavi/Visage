@@ -1,13 +1,18 @@
 import './page-styles.css';
 // import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
-// import axios from 'axios';
+import axios from 'axios';
 
 
-function Settings(){
+function Settings(props){
 
   const logOut = () => {
+    // send AJAX request to log out
+    axios.post('/logout', {session: localStorage.getItem('sessionId')}).catch((err) => {
+      console.log(err);
+    });
     localStorage.removeItem('userId');
+    localStorage.removeItem('sessionId');
   }
   
   return (
