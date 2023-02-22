@@ -11,7 +11,7 @@ function ProfileInfo(props){
         axios
            .get(`/getProfile/`, { params: {userId: props.id, session: props.session} })
            .then((response) => {
-                if (response.data === 'Not logged in') {
+                if (response.data === 'no_session_found') {
                     console.log('Not logged in');
                     // clear user Id and session Id from local storage and redirect to login page
                     localStorage.removeItem('userId');

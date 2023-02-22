@@ -16,7 +16,7 @@ function Messages(props){
             .get(`/getMessages/`, { params: {userId: props.id, otherPersonId: props.otherPersonId, session: props.session} })
             .then((response) => {
                 // if not logged in, redirect to login page
-                if (response.data === 'Not logged in') {
+                if (response.data === 'no_session_found') {
                     console.log('Not logged in');
                     // clear user Id and session Id from local storage and redirect to login page
                     localStorage.removeItem('userId');

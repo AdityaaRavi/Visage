@@ -25,7 +25,7 @@ function MessagesInputBox(props){
                 .then((response) => {
                     console.log(response.data)
                     // if not logged in, redirect to login page
-                    if (response.data === 'Not logged in') {
+                    if (response.data === 'no_session_found') {
                         console.log('Not logged in');
                         // clear user Id and session Id from local storage and redirect to login page
                         localStorage.removeItem('userId');
