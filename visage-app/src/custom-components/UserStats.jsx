@@ -9,8 +9,16 @@ function UserStats(props){
 
     useEffect(() => {
         axios
-           .get(`/userStats/`, { params: {userId: props.id} })
+           .get(`/userStats/`, { params: {userId: props.id, session: props.session} })
            .then((response) => {
+                if (response.data === 'Not logged in') {
+                    console.log('Not logged in');
+                    // clear user Id and session Id from local storage and redirect to login page
+                    localStorage.removeItem('userId');
+                    localStorage.removeItem('sessionId');
+                    window.location.href = '/';
+                    return;
+                }
                 setUserStats(response.data);
            })
            .catch((err) => {
