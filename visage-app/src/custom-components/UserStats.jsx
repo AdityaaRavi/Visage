@@ -9,7 +9,7 @@ function UserStats(props){
 
     useEffect(() => {
         axios
-           .get(`/userStats/`, { params: {userId: props.id, session: props.session} })
+           .get(`/userStats/`, { params: {myId: props.myId, userId: props.id, session: props.session} })
            .then((response) => {
                 if (response.data === 'no_session_found') {
                     console.log('Not logged in');

@@ -13,7 +13,7 @@ function Messages(props){
 
     function refreshMessages(){
         axios
-            .get(`/getMessages/`, { params: {userId: props.id, otherPersonId: props.otherPersonId, session: props.session} })
+            .get(`/getMessages/`, { params: {myId: props.myId, userId: props.id, otherPersonId: props.otherPersonId, session: props.session} })
             .then((response) => {
                 // if not logged in, redirect to login page
                 if (response.data === 'no_session_found') {
@@ -60,7 +60,7 @@ function Messages(props){
             {/* Note that props.id is a string! so Use "==" to compare and not "===" */}
             {messages && (messages.map((message) => (Number(message.sender_userID) == props.id) ? <p className='messages sentMessages'>{message.message}</p> : <p className='messages recievedMessages'>{message.message}</p>).reverse())}
         </div>
-        <MessagesInputBox id={props.id} otherPersonId={props.otherPersonId} messages={messages} setMessages={setMessages} session={props.session}/>
+        <MessagesInputBox myId={props.myId} id={props.id} otherPersonId={props.otherPersonId} messages={messages} setMessages={setMessages} session={props.session}/>
 
         <div className='devOnly'>{props.otherPersonId}</div>
     </div>

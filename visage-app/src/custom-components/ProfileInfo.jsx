@@ -9,7 +9,7 @@ function ProfileInfo(props){
 
     useEffect(() => {
         axios
-           .get(`/getProfile/`, { params: {userId: props.id, session: props.session} })
+           .get(`/getProfile/`, { params: {myId: props.myId, userId: props.id, session: props.session} })
            .then((response) => {
                 if (response.data === 'no_session_found') {
                     console.log('Not logged in');

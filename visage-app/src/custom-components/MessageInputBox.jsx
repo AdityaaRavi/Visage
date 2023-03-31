@@ -21,7 +21,7 @@ function MessagesInputBox(props){
     const sendMessage = () => {
         /* AJAX request to send message to server goes here*/
         try{
-            axios.post('/sendMessage', {userId: props.id, otherPersonId: props.otherPersonId, message: message, session: props.session})
+            axios.post('/sendMessage', {myId: props.myId, userId: props.id, otherPersonId: props.otherPersonId, message: message, session: props.session})
                 .then((response) => {
                     console.log(response.data)
                     // if not logged in, redirect to login page
@@ -32,7 +32,7 @@ function MessagesInputBox(props){
                         localStorage.removeItem('sessionId');
                         window.location.href = '/';
                         return;
-                    }
+                    } else window.location.href = '/messages';
                 });
             
             // Update messages in parent component (iff inside Messages.jsx)

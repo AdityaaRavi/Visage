@@ -11,7 +11,7 @@ function PersonPicker(props){
     useEffect(() => {
         if(props.getNew){
             axios
-            .get(`/getSuggestedConnections/`, { params: {userId: props.id, session: props.session} })
+            .get(`/getSuggestedConnections/`, { params: {myId: props.myId, userId: props.id, session: props.session} })
             .then((response) => {
                 // if not logged in, redirect to login page
                 if (response.data === 'no_session_found') {
@@ -31,7 +31,7 @@ function PersonPicker(props){
             });
         }else{
             axios
-            .get(`/getExistingConnections/`, { params: {userId: props.id, session: props.session} })
+            .get(`/getExistingConnections/`, { params: {myId: props.myId, userId: props.id, session: props.session} })
             .then((response) => {
                 // if not logged in, redirect to login page
                 if (response.data === 'no_session_found') {

@@ -16,7 +16,7 @@ function MessagesPage(props){
   const onRemoveConnectionButtonClick = (e) => {
 
     /* AJAX call to remove connection */
-    axios.post('/removeConnection', {userId: id, otherPersonId: otherPersonId, session: session})
+    axios.post('/removeConnection', {myId: id, userId: id, otherPersonId: otherPersonId, session: session})
          .then((response) => {
             // if not logged in, redirect to login page
             if (response.data === 'no_session_found') {
@@ -36,14 +36,14 @@ function MessagesPage(props){
     <div id='MessagesPage'>
       <div class='personPicker'>
         <h1>Current Connections</h1>
-        <PersonPicker className='personPickerComponent' id={id} picker={setOtherPerson} otherPersonId={otherPersonId} getNew={false} session={session}/>
+        <PersonPicker className='personPickerComponent' myId={id} id={id} picker={setOtherPerson} otherPersonId={otherPersonId} getNew={false} session={session}/>
       </div>
       <div class='VerticalDivider'></div>
       {otherPersonId !== id ?
         <div class='messageHolderLvl2'>
           {/* id is to identify the current user, person 
           is to identify the person at the other end of the conversation */}
-          <Messages id={id} otherPersonId={otherPersonId} session={session}/>
+          <Messages myId={id} id={id} otherPersonId={otherPersonId} session={session}/>
           <div>
             <Button variant='primary' 
             className='removeConnectionButton'

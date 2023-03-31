@@ -27,12 +27,12 @@ function App() {
             <Route path="/" element={!localStorage.getItem("sessionId") ? <LoginPage /> : <Profile id={localStorage.getItem("userId")} session={localStorage.getItem("sessionId")}/>} 
             />
             {/* If not logged in, only the login component should be shown regardless of path */}
-            <Route path="/profile" element={!localStorage.getItem("sessionId") ? <LoginPage /> : <Profile id={localStorage.getItem("userId")} session={localStorage.getItem("sessionId")}/>} 
+            <Route path="/profile" element={!localStorage.getItem("sessionId") ? <LoginPage /> : <Profile id={localStorage.getItem("userId")} myId={localStorage.getItem("userId")} session={localStorage.getItem("sessionId")}/>} 
             />
 
             <Route path="/messages" element={!localStorage.getItem("sessionId") ? <LoginPage /> : <MessagesPage />} />
 
-            <Route path="/connect" element={!localStorage.getItem("sessionId") ? <LoginPage /> : <ConnectPage id={localStorage.getItem("userId")} session={localStorage.getItem("sessionId")}/>} />
+            <Route path="/connect" element={!localStorage.getItem("sessionId") ? <LoginPage /> : <ConnectPage id={localStorage.getItem("userId")} myId={localStorage.getItem("userId")} session={localStorage.getItem("sessionId")}/>} />
 
             <Route path="/settings" element={!localStorage.getItem("sessionId") ? <LoginPage /> :  <Settings id={localStorage.getItem("userId")} session={localStorage.getItem("sessionId")}/>} />
 

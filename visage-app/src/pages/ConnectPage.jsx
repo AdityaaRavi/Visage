@@ -12,7 +12,7 @@ function ConnectPage(props){
 
   const onDeclineConnectionButtonClick = (e) => {
     /* AJAX call to remove connection */
-    axios.post('/declineSuggestion', {userId: props.id, otherPersonId: otherPersonId, session: props.session})
+    axios.post('/declineSuggestion', {myId: props.myId, userId: props.id, otherPersonId: otherPersonId, session: props.session})
          .then((response) => {
             // if not logged in, redirect to login page
             if (response.data === 'no_session_found') {
@@ -32,15 +32,15 @@ function ConnectPage(props){
     <div id='ConnectionsPage'>
       <div class='personPicker'>
         <h1>Suggested Connections</h1>
-        <PersonPicker className='personPickerComponent' id={props.id} picker={setOtherPerson} otherPersonId={otherPersonId} getNew={true} session={props.session}/>
+        <PersonPicker className='personPickerComponent' myId={props.myId} id={props.id} picker={setOtherPerson} otherPersonId={otherPersonId} getNew={true} session={props.session}/>
       </div>
       <div class='VerticalDivider'></div>
         <div class='messageHolderLvl2'>
-          <Profile id={otherPersonId != -1 ? otherPersonId : props.id} inConnectionPage={true} session={props.session}/>
+          <Profile myId={props.id} id={otherPersonId != -1 ? otherPersonId : props.id} inConnectionPage={true} session={props.session}/>
           {/* id is to identify the current user, person 
           is to identify the person at the other end of the conversation */}
           <div>Start a conversation:</div>
-          <MessagesInputBox id={props.id} otherPersonId={otherPersonId} session={props.session}/>
+          <MessagesInputBox myId={props.myId} id={props.id} otherPersonId={otherPersonId} session={props.session}/>
           <div>
             <Button variant='primary' 
             className='declineConnectionButton'
