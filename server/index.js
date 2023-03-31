@@ -3,7 +3,7 @@ import express from "express";
 // controllers
 import userStatsController from "./userInfo/userStatsController.js";
 import getProfileController from "./userInfo/getProfileController.js";
-import createUserController from "./userInfo/createUserController.js";
+import createUserController from "./authentication/createUserController.js";
 import updateProfileController from "./userInfo/updateProfleController.js";
 import getMessagesController from "./messaging/getMessagesController.js";
 import sendMessageController from "./messaging/sendMessagesController.js";
@@ -12,8 +12,9 @@ import getSuggestedConnectionsController from "./connections/getSuggestedConnect
 import removeConnectionController from "./connections/removeConnectionController.js";
 import declineSuggestionController from "./connections/declineSuggestionController.js";
 import acceptSuggestionController from "./connections/acceptSuggestionController.js";
-import userLoginController from "./userInfo/userLoginController.js";
-import userLogoutController from "./userInfo/userLogOutController.js";
+import userLoginController from "./authentication/userLoginController.js";
+import userLogoutController from "./authentication/userLogOutController.js";
+import runIfLoggedIn from "./authentication/loginVerificationController.js";
 
 import mysql from 'mysql2';
 
@@ -37,16 +38,17 @@ app.get("/hello", (req, res) => {
 ////////////////////////////////// User info //////////////////////////////////
 
 // GET request for user stats (++ connected to the database)
-app.get("/userStats/", (req, res) => userStatsController(req, res, connection));
+app.get("/userStats/", (req, res) =>  runIfLoggedIn(req, res, userStatsController, connection));
+//app.get("/userStats/", (req, res) => userStatsController(req, res, connection));
 
 // GET request to get a user's profile (++ connected to the database)
-app.get('/getProfile/', (req, res) =>  getProfileController(req, res, connection));
+app.get('/getProfile/', (req, res) =>  runIfLoggedIn(req, res, getProfileController, connection));
 
 // POST request to create a user account --- NOT YET IMPLEMENTED ON THE FRONTEND (++ connected to the database)
-app.post('/createUser', (req, res) => createUserController(req, res, connection));
+app.post('/createUser', (req, res) => runIfLoggedIn(req, res, createUserController, connection));
 
 // POST request to update a user's profile --- NOT YET IMPLEMENTED ON THE FRONTEND (++ connected to the database)
-app.post('/updateProfile', (req, res) => updateProfileController(req, res, connection));
+app.post('/updateProfile', (req, res) => runIfLoggedIn(req, res, updateProfileController, connection));
 
 // POST request to login a user (++ connected to the database)
 app.post('/login', (req, res) => userLoginController(req, res, connection));
@@ -56,23 +58,24 @@ app.post('/logout', (req, res) => userLogoutController(req, res, connection));
 
 ////////////////////////////////// Messaging //////////////////////////////////
 // GET request for all the messages between two users (++ connected to the database)
-app.get("/getMessages/", (req, res) => getMessagesController(req, res, connection)); 
+app.get("/getMessages/", (req, res) => runIfLoggedIn(req, res, getMessagesController, connection)); 
 
 // POST request to send a message to a user (++ connected to the database)
-app.post('/sendMessage/',(req, res) =>  sendMessageController(req, res, connection));
+app.post('/sendMessage/',(req, res) =>  runIfLoggedIn(req, res, sendMessageController, connection));
+//app.post('/sendMessage/',(req, res) =>  sendMessageController(req, res, connection));
 
 ////////////////////////////////// Connections //////////////////////////////////
 // GET request for all the connections of a user  (++ connected to the database)
-app.get("/getExistingConnections/", (req, res) =>  getExistingConnectionsController(req, res, connection));
+app.get("/getExistingConnections/", (req, res) =>  runIfLoggedIn(req, res, getExistingConnectionsController, connection));
 
 // GET request to the connection suggestions created by us for the user (++ connected to the database)
-app.get('/getSuggestedConnections/', (req, res) =>  getSuggestedConnectionsController(req, res, connection));
+app.get('/getSuggestedConnections/', (req, res) =>  runIfLoggedIn(req, res, getSuggestedConnectionsController, connection));
 
 // POST request to remove a connection (++ connected to the database)
-app.post('/removeConnection/',(req, res) => removeConnectionController(req, res, connection));
+app.post('/removeConnection/',(req, res) => runIfLoggedIn(req, res, removeConnectionController, connection));
 
 // POST request to decline a suggested connection (++ connected to the database)
-app.post('/declineSuggestion/',(req, res) => declineSuggestionController(req, res, connection));
+app.post('/declineSuggestion/',(req, res) => runIfLoggedIn(req, res, declineSuggestionController, connection));
 
 // // POST request to accept a suggested connection
 // /// Might not need an endpoint for this... If a person sends a message, the other person should automatically be considered a connection.
