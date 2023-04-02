@@ -56,6 +56,11 @@ body{
     align-items: center;
 }
 
+.settingsPage{
+    margin-left: 10vw;
+    margin-right: 10vw;
+}
+
 /******************************* Dev mode toggle ****/
 .devOnly{
     visibility: hidden;
@@ -64,6 +69,9 @@ body{
 
 
 @media (max-width: 996px) {
+    .settingsPage{
+        margin: 0vw;
+    }
     div{
         align-items: center;
     }

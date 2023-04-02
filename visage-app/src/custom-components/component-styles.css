@@ -265,9 +265,18 @@ em{
       }
 }
 
+.profileEdit {
+    max-width: 90%;
+    /* margin: 10vw; */
+}
+
 @media (max-width: 500px) {
     body{
         font-size: 9px;
+    }
+    .profileEdit {
+        max-width: 100%;
+        margin: 0;
     }
     .messagesContainer {
         /* background-color: #fff;
