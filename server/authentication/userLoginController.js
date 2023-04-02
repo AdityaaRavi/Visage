@@ -9,7 +9,7 @@ const userLoginController = (req, res, mysqlConnection) => {
       // check if the email and password match
       mysqlConnection.query("SELECT userId, password FROM user_login WHERE email = ?;", (email), (err, lis) => {
         if(err) throw err;
-        lis = lis.filter((user) => user.password == password);
+        lis = lis.filter((user) => user.password === password);
         if(lis.length === 0) res.json({error: "Email or password is incorrect!"});
         else{
           //res.json({message: "success", userId: lis[0].userId});

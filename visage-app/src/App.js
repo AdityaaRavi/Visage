@@ -8,7 +8,7 @@ import Profile from './pages/Profile';
 import MessagesPage from './pages/MessagesPage';
 import ConnectPage from './pages/ConnectPage';
 import Settings from './pages/Settings';
-import EditProfile from './pages/EditProfile';
+//import EditProfile from './pages/EditProfile';
 import LoginPage from './pages/LoginPage';
 
 function App() {
@@ -34,9 +34,9 @@ function App() {
 
             <Route path="/connect" element={!localStorage.getItem("sessionId") ? <LoginPage /> : <ConnectPage id={localStorage.getItem("userId")} myId={localStorage.getItem("userId")} session={localStorage.getItem("sessionId")}/>} />
 
-            <Route path="/settings" element={!localStorage.getItem("sessionId") ? <LoginPage /> :  <Settings id={localStorage.getItem("userId")} session={localStorage.getItem("sessionId")}/>} />
+            <Route path="/settings" element={!localStorage.getItem("sessionId") ? <LoginPage /> :  <Settings myId={localStorage.getItem("userId")} id={localStorage.getItem("userId")} session={localStorage.getItem("sessionId")}/>} />
 
-            <Route path="/editProfile" element={!localStorage.getItem("sessionId") ? <LoginPage /> : <Settings id={localStorage.getItem("userId")} session={localStorage.getItem("sessionId")}/>} />
+            <Route path="/editProfile" element={!localStorage.getItem("sessionId") ? <LoginPage /> : <Settings myId={localStorage.getItem("userId")} id={localStorage.getItem("userId")} session={localStorage.getItem("sessionId")}/>} />
 
             </Routes>
       </BrowserRouter> 

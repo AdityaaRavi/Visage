@@ -11,14 +11,17 @@ const verifyInputAndRun = (req, res, method, mysqlConnection) => {
         userId = req.body.userId;
         session = req.body.session;
     }
-    console.log("session: " + session + " myId: " + myId + " userId: " + userId);
+
     // server-wide input validation
     if ((req.body === {} && req.query === {}) || userId === undefined || myId === undefined || session === undefined) {
         res.send("invalid_input");
+        console.log("session: " + session + " myId: " + myId + " userId: " + userId);
+        cons
         console.log("invalid_input");
     }else{
-        method(req, res, mysqlConnection);
+        //method(req, res, mysqlConnection);
     }
+    method(req, res, mysqlConnection);
 
 }
 

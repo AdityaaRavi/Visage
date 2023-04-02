@@ -13,13 +13,6 @@ const runIfLoggedIn = (req, res, method, mysqlConnection) => {
         userId = req.body.userId;
         session = req.body.session;
     }
-    console.log("session: " + session + " myId: " + myId + " userId: " + userId);
-    // server-wide input validation
-    if ((req.body === {} && req.query === {}) || userId == null || myId == null || session == null) {
-        res.send("invalid_input");
-        console.log("invalid_input");
-        return;
-    }
 
     try{
         mysqlConnection.query("use visage_app;", (err) => {if (err) throw err;});
