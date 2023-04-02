@@ -1,21 +1,21 @@
 const updateProfileController = (req, res, mysqlConnection) => {
   const name = req.body.name;
-  const email = req.body.email;
-  const password = req.body.password;
+  // const email = req.body.email;
+  // password = req.body.password;
   let userId = req.body.userId;
   
-  let topSkills = req.body.topSkills;
+  let topSkills = req.body.top4Skills.map((x) => x.toLowerCase().strip());
   
-  let orgs = req.body.orgs;
+  let orgs = req.body.orgs.map((x) => x.toLowerCase().strip());
   if (orgs.length < 4) for (let i = orgs.length; i < 4; i++) orgs.push(null);
   
-  let schools = req.body.schools;
+  let schools = req.body.schools.map((x) => x.toLowerCase().strip());
   if (schools.length < 3) for (let i = schools.length; i < 3; i++) schools.push(null);
   
-  let career = req.body.career;
+  let career = req.body.career.map((x) => x.toLowerCase().strip());
   if (career.length < 3) for (let i = career.length; i < 3; i++) career.push(null);
   
-  let fun = req.body.fun;
+  let fun = req.body.fun.map((x) => x.toLowerCase().strip());
   if (fun.length < 3) for (let i = fun.length; i < 3; i++) fun.push(null);
   
   const description = req.body.description;
@@ -23,8 +23,8 @@ const updateProfileController = (req, res, mysqlConnection) => {
   try{
     // Create user
     mysqlConnection.query("use visage_app;", (err) => {if (err) throw err;});
-    mysqlConnection.query('UPDATE user_login SET name=?, email=?, password=? ' +
-                          'WHERE userId=?;', [name, email, password, userId], (err, result) => {
+    mysqlConnection.query('UPDATE user_login SET name=?' +
+                          'WHERE userId=?;', [name, userId], (err, result) => {
       if (err) throw err;
       
       const param = [name, 
@@ -40,10 +40,7 @@ const updateProfileController = (req, res, mysqlConnection) => {
                             'WHERE userId=?;'
                           , param, (err, result2) => {
         if (err) throw err;
-        res.json({
-          message: `User updated successfully!\nName: ${name}, userId: ${userId}`,
-          userId: userId
-        });
+        res.send('success');
       });
     });
 
