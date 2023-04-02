@@ -2,9 +2,20 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import './component-styles.css';
+import axios from 'axios';
+
 //import { MDBInputGroup, MDBInput, MDBIcon, MDBBtn } from 'mdb-react-ui-kit';
 
 function TitleBar(){
+
+  const logOut = () => {
+    // send AJAX request to log out
+    axios.post('/logout', {session: localStorage.getItem('sessionId')}).catch((err) => {
+      console.log(err);
+    });
+    localStorage.removeItem('userId');
+    localStorage.removeItem('sessionId');
+  }
   
   return (
     <Navbar sticky='top' className='nav-bar'>
@@ -17,6 +28,8 @@ function TitleBar(){
             <Nav.Link className="nav-item" id="messages-link" href="/messages">Messages</Nav.Link>
             <Nav.Link className="nav-item" id="connect-link" href="/connect">Connect</Nav.Link>
             <Nav.Link className="nav-item" id="settings-link" href="/settings">Settings</Nav.Link>
+            <Nav.Link className="nav-item" id="logout-link" href="/" onClick={logOut}>Log Out</Nav.Link>
+            
             {/* <MDBCol md="6">
               <form className="form-inline mt-4 mb-4">
                 <MDBIcon icon="search" />
