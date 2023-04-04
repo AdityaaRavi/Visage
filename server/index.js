@@ -15,6 +15,8 @@ import acceptSuggestionController from "./connections/acceptSuggestionController
 import userLoginController from "./authentication/userLoginController.js";
 import userLogoutController from "./authentication/userLogOutController.js";
 import runIfLoggedIn from "./authentication/loginVerificationController.js";
+import getEmailController from "./userInfo/getEmailController.js";
+import updateLoginController from "./authentication/updateLoginController.js";
 
 import mysql from 'mysql2';
 
@@ -47,8 +49,14 @@ app.get('/getProfile/', (req, res) =>  runIfLoggedIn(req, res, getProfileControl
 // POST request to create a user account --- NOT YET IMPLEMENTED ON THE FRONTEND (++ connected to the database)
 app.post('/createUser', (req, res) => runIfLoggedIn(req, res, createUserController, connection));
 
-// POST request to update a user's profile --- NOT YET IMPLEMENTED ON THE FRONTEND (++ connected to the database)
+// POST request to update a user's profile (++ connected to the database)
 app.post('/updateProfile', (req, res) => runIfLoggedIn(req, res, updateProfileController, connection));
+
+// GET request to get a user's email (++ connected to the database)
+app.get('/getEmail/', (req, res) => runIfLoggedIn(req, res, getEmailController, connection));
+
+// POST request to update a user's login info (++ connected to the database)
+app.post('/updateLogin', (req, res) => runIfLoggedIn(req, res, updateLoginController, connection));
 
 // POST request to login a user (++ connected to the database)
 app.post('/login', (req, res) => userLoginController(req, res, connection));
