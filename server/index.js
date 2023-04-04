@@ -17,6 +17,8 @@ import userLogoutController from "./authentication/userLogOutController.js";
 import runIfLoggedIn from "./authentication/loginVerificationController.js";
 import getEmailController from "./userInfo/getEmailController.js";
 import updateLoginController from "./authentication/updateLoginController.js";
+import isUniqueEmailController from "./userInfo/isUniqueEmailController.js";
+
 
 import mysql from 'mysql2';
 
@@ -47,7 +49,7 @@ app.get("/userStats/", (req, res) =>  runIfLoggedIn(req, res, userStatsControlle
 app.get('/getProfile/', (req, res) =>  runIfLoggedIn(req, res, getProfileController, connection));
 
 // POST request to create a user account --- NOT YET IMPLEMENTED ON THE FRONTEND (++ connected to the database)
-app.post('/createUser', (req, res) => runIfLoggedIn(req, res, createUserController, connection));
+app.post('/createUser', (req, res) => createUserController(req, res, connection));
 
 // POST request to update a user's profile (++ connected to the database)
 app.post('/updateProfile', (req, res) => runIfLoggedIn(req, res, updateProfileController, connection));
@@ -63,6 +65,9 @@ app.post('/login', (req, res) => userLoginController(req, res, connection));
 
 // POST request to logout a user (++ connected to the database)
 app.post('/logout', (req, res) => userLogoutController(req, res, connection));
+
+// GET request to check if an email is unique (++ connected to the database)
+app.get('/isUniqueEmail/', (req, res) => isUniqueEmailController(req, res, connection));
 
 ////////////////////////////////// Messaging //////////////////////////////////
 // GET request for all the messages between two users (++ connected to the database)

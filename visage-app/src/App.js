@@ -10,6 +10,7 @@ import ConnectPage from './pages/ConnectPage';
 import Settings from './pages/Settings';
 //import EditProfile from './pages/EditProfile';
 import LoginPage from './pages/LoginPage';
+import Register from './pages/Register';
 
 function App() {
   
@@ -37,6 +38,8 @@ function App() {
             <Route path="/settings" element={!localStorage.getItem("sessionId") ? <LoginPage /> :  <Settings myId={localStorage.getItem("userId")} id={localStorage.getItem("userId")} session={localStorage.getItem("sessionId")}/>} />
 
             <Route path="/editProfile" element={!localStorage.getItem("sessionId") ? <LoginPage /> : <Settings myId={localStorage.getItem("userId")} id={localStorage.getItem("userId")} session={localStorage.getItem("sessionId")}/>} />
+
+            <Route path="/register" element={<Register />} />
 
             </Routes>
       </BrowserRouter> 

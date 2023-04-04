@@ -3,7 +3,8 @@ const createUserController = (req, res, mysqlConnection) => {
     const email = req.body.email;
     const password = req.body.password;
     
-    let topSkills = req.body.topSkills;
+    let topSkills = req.body.top4Skills;
+    if (topSkills.length != 4) res.send("invalid_input");
     
     let orgs = req.body.orgs;
     if (orgs.length < 4) for (let i = orgs.length; i < 4; i++) orgs.push(null);
@@ -52,7 +53,8 @@ const createUserController = (req, res, mysqlConnection) => {
             if (err) throw err;
             res.json({
               message: `User created successfully!\nName: ${name}, userId: ${userId}`,
-              userId: userId
+              userId: userId,
+              short: "success" 
             });
           });
         });
