@@ -18,7 +18,7 @@ function EditProfile(props){
     const [lengthError, setLengthError] = useState(false);
     const [nameError, setNameError] = useState(false);
     const [descriptionError, setDescriptionError] = useState(false);
-    const [sucess, setSuccess] = useState(false);
+    const [success, setSuccess] = useState(false);
 
     // length of the arrays
     const [orgsLength, setOrgsLength] = useState(0);
@@ -282,7 +282,7 @@ function EditProfile(props){
                     Submit
                 </Button>
                 <br />
-                {sucess && <span style={{color: 'green'}}>
+                {success && <span style={{color: 'green'}}>
                     Profile updated
                 </span>}
 
