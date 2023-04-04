@@ -104,8 +104,8 @@ function EditProfile(props){
         } else {
             setDescriptionError(false);
         }
-        if (orgsLength > 5 || schoolsLength > 4 || careerLength > 4 || funLength > 4 || skillsLength > 5 ||
-            orgsLength < 1 || schoolsLength < 1 || careerLength < 1 || funLength < 1 || skillsLength < 1) {
+        if (orgsLength > 5 || schoolsLength > 4 || careerLength > 4 || funLength > 4 || skillsLength !== 4 ||
+            orgsLength < 1 || schoolsLength < 1 || careerLength < 1 || funLength < 1) {
             setLengthError(true);
         } else {
             setLengthError(false);
@@ -267,7 +267,7 @@ function EditProfile(props){
                     onFocus={onChangeSkills}
                     onBlur={onChangeSkills}
                     />
-                    {(!skillsLength || skillsLength < 1 || skillsLength > 4) ? <span style={{color: 'red'}}>{skillsLength}/4 </span> : <span>{skillsLength}/4 </span>}
+                    {(!skillsLength || skillsLength != 4) ? <span style={{color: 'red'}}>{skillsLength}/4 <br /> You must enter exactly four skills </span> : <span>{skillsLength}/4 </span>}
                 
                 </div>
                 <br/>
