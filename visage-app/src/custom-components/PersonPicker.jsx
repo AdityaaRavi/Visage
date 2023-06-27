@@ -23,7 +23,7 @@ function PersonPicker(props){
                     return;
                 }
                 setConnections(response.data);
-                if(props.otherPersonId === -1 || props.otherPersonId === props.id) props.picker(connections[0].id);
+                if((props.otherPersonId === -1 || props.otherPersonId === props.id) && response.data.length !== 0) props.picker(connections[0].id);
     
             })
             .catch((err) => {
@@ -43,7 +43,7 @@ function PersonPicker(props){
                     return;
                 }
                 setConnections(response.data);
-                if(props.otherPersonId === -1 || props.otherPersonId === props.id) props.picker(connections[0].id);
+                if((props.otherPersonId === -1 || props.otherPersonId === props.id) && response.data.length !== 0) props.picker(connections[0].id);
             })
             .catch((err) => {
                 console.log(err);

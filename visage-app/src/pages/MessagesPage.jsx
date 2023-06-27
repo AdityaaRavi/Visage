@@ -53,7 +53,7 @@ function MessagesPage(props){
           </div>
         </div> :
         <div>
-          <h1 class='noConnectionMessage'>Select a connection to start messaging</h1>
+          <h1 class='noConnectionMessage'>Select or <a href='/connect'>create</a> a connection to start messaging</h1>
         </div>}
     </div>
     );
