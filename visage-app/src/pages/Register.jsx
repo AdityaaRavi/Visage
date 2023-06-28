@@ -1,12 +1,9 @@
 import './page-styles.css';
-import EditProfile from '../custom-components/EditProfile';
-import EditLoginInfo from '../custom-components/EditLoginInfo';
 import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 
 function Register(props){
-  const [profile, setProfile] = useState(null);
   const [orgs, setOrgs] = useState([]);
   const [schools, setSchools] = useState([]);
   const [career, setCareer] = useState([]);
@@ -31,7 +28,6 @@ function Register(props){
   // 1 - login info, 2 - profile. On 2, the next button should say "Finish".
   const [pageNum, setPageNum] = useState(1);
   const [buttonName, setButtonName] = useState('Next');
-  // states
   const [emailError, setEmailError] = useState(false);
   const [uniqueEmailError, setUniqueEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
@@ -73,6 +69,7 @@ function Register(props){
   const onChangeEmail = (e) => {
     if(e.target.value.length < 1) setEmail(' ');
     else setEmail(e.target.value.trim());
+    setUniqueEmailError(false);
   }
 
   const onChangePassword = (e) => {
@@ -80,31 +77,31 @@ function Register(props){
   }
 
   const onChangeOrgs = (e) => {
-      setOrgs(e.target.value.split(',').map((x) => x.trim()));
+      setOrgs(e.target.value.split(',').map((x) => x.replace(/^\s+/, "")));
       setOrgsLength(e.target.value.split(',').length);
       if(orgs[0] === '') setOrgsLength(0);
   }
 
   const onChangeSkills = (e) => {
-      setSkills(e.target.value.split(',').map((x) => x.trim()));
+      setSkills(e.target.value.split(',').map((x) => x.replace(/^\s+/, "")));
       setSkillsLength(e.target.value.split(',').length);
       if(skills[0] === '') setSkillsLength(0);
   }
 
   const onChangeSchools = (e) => {
-      setSchools(e.target.value.split(',').map((x) => x.trim()));
+      setSchools(e.target.value.split(',').map((x) => x.replace(/^\s+/, "")));
       setSchoolsLength(e.target.value.split(',').length);
       if(schools[0] === '') setSchoolsLength(0);
   }
 
   const onChangeCareer = (e) => {
-      setCareer(e.target.value.split(',').map((x) => x.trim()));
+      setCareer(e.target.value.split(',').map((x) => x.replace(/^\s+/, "")));
       setCareerLength(e.target.value.split(',').length);
       if(career[0] === '') setCareerLength(0);
   }
 
   const onChangeFun = (e) => {
-      setFun(e.target.value.split(',').map((x) => x.trim()));
+      setFun(e.target.value.split(',').map((x) => x.replace(/^\s+/, "")));
       setFunLength(e.target.value.split(',').length);
       if(fun[0] === '') setFunLength(0);
   }
@@ -175,6 +172,7 @@ function Register(props){
                 <label><em>Email</em></label>
                 <input type="text" className="form-control" value={email} onChange={onChangeEmail} />
                 {emailError && <span style={{color: 'red'}}>Should be a valid email address.</span>}
+                <br />
                 {uniqueEmailError && <span style={{color: 'red'}}>This email is already in use.</span>}
             </div>
             <br/>

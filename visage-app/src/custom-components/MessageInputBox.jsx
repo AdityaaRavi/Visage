@@ -32,7 +32,10 @@ function MessagesInputBox(props){
                         localStorage.removeItem('sessionId');
                         window.location.href = '/';
                         return;
-                    } else window.location.href = '/messages';
+                    } else{
+                        window.location.href = '/messages';
+                        window.location.reload();
+                    } 
                 });
             
             // Update messages in parent component (iff inside Messages.jsx)

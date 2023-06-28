@@ -114,31 +114,31 @@ function EditProfile(props){
 
 
     const onChangeOrgs = (e) => {
-        setOrgs(e.target.value.split(',').map((x) => x.trim()));
+        setOrgs(e.target.value.split(',').map((x) => x.replace(/^\s+/, "")));
         setOrgsLength(e.target.value.split(',').length);
         if(orgs[0] === '') setOrgsLength(0);
     }
 
     const onChangeSkills = (e) => {
-        setSkills(e.target.value.split(',').map((x) => x.trim()));
+        setSkills(e.target.value.split(',').map((x) => x.replace(/^\s+/, "")));
         setSkillsLength(e.target.value.split(',').length);
         if(skills[0] === '') setSkillsLength(0);
     }
 
     const onChangeSchools = (e) => {
-        setSchools(e.target.value.split(',').map((x) => x.trim()));
+        setSchools(e.target.value.split(',').map((x) => x.replace(/^\s+/, "")));
         setSchoolsLength(e.target.value.split(',').length);
         if(schools[0] === '') setSchoolsLength(0);
     }
 
     const onChangeCareer = (e) => {
-        setCareer(e.target.value.split(',').map((x) => x.trim()));
+        setCareer(e.target.value.split(',').map((x) => x.replace(/^\s+/, "")));
         setCareerLength(e.target.value.split(',').length);
         if(career[0] === '') setCareerLength(0);
     }
 
     const onChangeFun = (e) => {
-        setFun(e.target.value.split(',').map((x) => x.trim()));
+        setFun(e.target.value.split(',').map((x) => x.replace(/^\s+/, "")));
         setFunLength(e.target.value.split(',').length);
         if(fun[0] === '') setFunLength(0);
     }

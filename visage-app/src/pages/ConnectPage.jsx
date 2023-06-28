@@ -8,7 +8,7 @@ import axios from 'axios';
 
 function ConnectPage(props){
   
-  const [otherPersonId, setOtherPerson] = useState(2);
+  const [otherPersonId, setOtherPerson] = useState(-1);
 
   const onDeclineConnectionButtonClick = (e) => {
     /* AJAX call to remove connection */
@@ -25,6 +25,8 @@ function ConnectPage(props){
             }
             console.log(response.data);
             setOtherPerson(-1);
+            // refesh the page
+            window.location.reload();
           });         
   }
 
@@ -35,6 +37,7 @@ function ConnectPage(props){
         <PersonPicker className='personPickerComponent' myId={props.myId} id={props.id} picker={setOtherPerson} otherPersonId={otherPersonId} getNew={true} session={props.session}/>
       </div>
       <div class='VerticalDivider'></div>
+      {otherPersonId !== -1 ?
         <div class='messageHolderLvl2'>
           <Profile myId={props.id} id={otherPersonId != -1 ? otherPersonId : props.id} inConnectionPage={true} session={props.session}/>
           {/* id is to identify the current user, person 
@@ -48,7 +51,10 @@ function ConnectPage(props){
               Decline Connection Suggestion
             </Button>
           </div>
-        </div>
+        </div> :
+        <div>
+          <h1 class='noConnectionMessage'>Select a suggestion from the list to get started!</h1>
+        </div>}
     </div>
     );
 }

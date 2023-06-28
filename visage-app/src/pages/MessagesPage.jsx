@@ -39,7 +39,7 @@ function MessagesPage(props){
         <PersonPicker className='personPickerComponent' myId={id} id={id} picker={setOtherPerson} otherPersonId={otherPersonId} getNew={false} session={session}/>
       </div>
       <div class='VerticalDivider'></div>
-      {otherPersonId !== id ?
+      {otherPersonId !== id && otherPersonId !== -1 ?
         <div class='messageHolderLvl2'>
           {/* id is to identify the current user, person 
           is to identify the person at the other end of the conversation */}
