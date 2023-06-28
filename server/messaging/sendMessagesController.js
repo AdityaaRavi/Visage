@@ -1,3 +1,5 @@
+import createSuggestionsHelper from '../connections/createSuggestionsHelper.js';
+
 const sendMessageController = (req, res, mysqlConnection) => {
     const senderId = req.body.userId;
     const recepientId = req.body.otherPersonId;
@@ -21,14 +23,16 @@ const sendMessageController = (req, res, mysqlConnection) => {
             let connectionId = Math.floor(Math.random() * 2147483647);
             while(lis.includes(connectionId)) connectionId = Math.floor(Math.random() * 2147483647);
 
-            mysqlConnection.query('INSERT INTO connections (connection_ID, lower_userID, higher_userID) VALUES (?, ?, ?);', [connectionId, senderId > recepientId ? recepientId : senderId, senderId < recepientId ? recepientId : senderId], (err, result) => {
+            mysqlConnection.query('INSERT INTO connections (connection_ID, lower_userID, higher_userID) VALUES (?, ?, ?);', [connectionId, senderId > recepientId ? recepientId : senderId, senderId < recepientId ? recepientId : senderId], async (err, result) => {
               if (err) throw err;
               // and change the suggested connection status to not pending
               mysqlConnection.query('UPDATE suggested_connections SET pending=false, accepted=true WHERE (lower_userID=? AND higher_userID=?) OR (lower_userID=? AND higher_userID=?);', [senderId, recepientId, recepientId, senderId], (err, result) => {
                 if (err) throw err;
               });
               // and also change the number of connections field for both the users
-              mysqlConnection.query('UPDATE user_info SET num_connections=num_connections+1 WHERE userID=? OR userID=?;', [senderId, recepientId], (err, result) => {if (err) throw err;});
+              mysqlConnection.query('UPDATE user_info SET num_connections=num_connections+1 WHERE userID=? OR userID=?;', [senderId, recepientId],  (err, result) => {if (err) throw err;});
+              // add a new connection suggestion
+              await createSuggestionsHelper(1, senderId, res, mysqlConnection);
             });
           });
         }

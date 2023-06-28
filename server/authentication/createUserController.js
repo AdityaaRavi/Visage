@@ -1,3 +1,5 @@
+import createSuggestionsHelper from "../connections/createSuggestionsHelper.js";
+
 const createUserController = (req, res, mysqlConnection) => {
     const name = req.body.name;
     const email = req.body.email;
@@ -49,8 +51,11 @@ const createUserController = (req, res, mysqlConnection) => {
           
           mysqlConnection.query('INSERT INTO user_info (userId, name, top_skill1, top_skill2, top_skill3, top_skill4, org1, org2, org3, org4, school1, school2, school3, career1, career2, career3, fun1, fun2, fun3, description) ' +
                               'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);'
-                              , param, (err, result2) => {
+                              , param, async (err, result2) => {
             if (err) throw err;
+            // create initial connection suggestions
+            await createSuggestionsHelper(5, userId, res, mysqlConnection);
+
             res.json({
               message: `User created successfully!\nName: ${name}, userId: ${userId}`,
               userId: userId,
