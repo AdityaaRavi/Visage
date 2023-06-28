@@ -36,6 +36,12 @@ const app = express();
 // This will add the body of a POST request to the req.body object
 app.use(express.json());
 
+// // print out the request
+// app.use((req, res, next) => {
+//   if (req.method == "POST") console.log(`Request_Endpoint: ${req.method} ${req.url}`);
+//   next();
+// });
+
 app.get("/hello", (req, res) => {
   res.json({ message: "Hello from server!" });
 });
