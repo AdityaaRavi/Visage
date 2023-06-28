@@ -6,10 +6,16 @@ const getExistingConnectionsController = (req, res, mysqlConnection) => {
     mysqlConnection.query('SELECT * FROM connections WHERE lower_userID=? OR higher_userID=? ORDER BY time_of_connection DESC;', [userId, userId], (err, result) => {
       if (err) throw err;
       let connections = result.map((connection) => connection.lower_userID == userId ? connection.higher_userID : connection.lower_userID);
+      // Error handling -- if there are no connections, add a dummy connection so that the query doesn't fail
+      if (connections.length == 0) connections.push(-1);
       let connectionsString = connections.join(' OR userId = ');
 
       mysqlConnection.query(`SELECT * FROM user_info WHERE userId = ${connectionsString};`, (err, result) => {
-        if (err) throw err;
+        if (err){
+          console.log(err);
+          console.log("connectionsString:_" + connectionsString);
+          throw err;
+        } 
         let connectionsInfo = result.map((result) => {return {
           id: result.userId,
           name: result.name,
