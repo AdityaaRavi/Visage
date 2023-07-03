@@ -32,7 +32,7 @@ function MessagesInputBox(props){
                         localStorage.removeItem('sessionId');
                         window.location.href = '/';
                         return;
-                    } else{
+                    } else if(props.inConnectPage){
                         window.location.href = '/messages';
                         window.location.reload();
                     } 

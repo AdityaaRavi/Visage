@@ -43,7 +43,7 @@ function ConnectPage(props){
           {/* id is to identify the current user, person 
           is to identify the person at the other end of the conversation */}
           <div>Start a conversation:</div>
-          <MessagesInputBox myId={props.myId} id={props.id} otherPersonId={otherPersonId} session={props.session}/>
+          <MessagesInputBox myId={props.myId} id={props.id} otherPersonId={otherPersonId} session={props.session} inConnectPage={true}/>
           <div>
             <Button variant='primary' 
             className='declineConnectionButton'
