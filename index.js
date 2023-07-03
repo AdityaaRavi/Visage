@@ -37,6 +37,7 @@ import mysql from 'mysql2';
 //     Port: process.env.db_port,
 //   });
 // }
+console.log(process.env);
 
 var connection = mysql.createConnection({
   host: process.env.host, //"visage.database.windows.net", 
