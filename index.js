@@ -22,11 +22,24 @@ import isUniqueEmailController from "./server/userInfo/isUniqueEmailController.j
 
 import mysql from 'mysql2';
 
-var connection = mysql.createConnection({
-    host: '127.0.0.1',
-    user: 'root',
-    // password: '',
-});
+if(process.env.NODE_ENV === 'development'){
+  var connection = mysql.createConnection({
+      host: '127.0.0.1',
+      user: 'root',
+      // password: '',
+  });
+} else {
+  var connection = mysql.createConnection({
+    host: process.env.host, //"visage.database.windows.net", 
+    user: process.env.user,//"visage_admin", 
+    password: process.env.password,
+    database: process.env.database, 
+    Port: process.env.db_port,
+  });
+}
+
+
+
 connection.connect((err) => {if (err) throw err});
 
 const PORT = process.env.PORT || 3001;
