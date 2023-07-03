@@ -39,14 +39,14 @@ import isUniqueEmailController from "./server/userInfo/isUniqueEmailController.j
 // }
 console.log(process.env);
 
-const sql = require('mssql');
-
+import sql from 'mssql';
+// SEE HERE
 var connection = sql.createConnection({
-  host: process.env.host, //"visage.database.windows.net", 
-  user: process.env.user,//"visage_admin", 
-  password: process.env.password,
-  database: process.env.database, 
-  Port: process.env.db_port,
+  host: process.env.host, // process.env.MYSQLCONNSTR_host,
+  user: process.env.user, // process.env.MYSQLCONNSTR_user, // "visage_admin",
+  password: process.env.password, // process.env.MYSQLCONNSTR_password,
+  database: process.env.database,  // process.env.MYSQLCONNSTR_database, // "visage",
+  Port: process.env.db_port, // process.env.MYSQLCONNSTR_db_port,
 });
 
 
