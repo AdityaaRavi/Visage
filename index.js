@@ -20,7 +20,7 @@ import updateLoginController from "./server/authentication/updateLoginController
 import isUniqueEmailController from "./server/userInfo/isUniqueEmailController.js";
 
 
-import mysql from 'mysql2';
+//import mysql from 'mysql2';
 
 // if(process.env.NODE_ENV === 'development'){
 //   var connection = mysql.createConnection({
@@ -39,7 +39,9 @@ import mysql from 'mysql2';
 // }
 console.log(process.env);
 
-var connection = mysql.createConnection({
+const sql = require('mssql');
+
+var connection = sql.createConnection({
   host: process.env.host, //"visage.database.windows.net", 
   user: process.env.user,//"visage_admin", 
   password: process.env.password,
