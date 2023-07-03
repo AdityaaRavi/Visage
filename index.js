@@ -1,23 +1,23 @@
 // imports
 import express from "express";
 // controllers
-import userStatsController from "./userInfo/userStatsController.js";
-import getProfileController from "./userInfo/getProfileController.js";
-import createUserController from "./authentication/createUserController.js";
-import updateProfileController from "./userInfo/updateProfleController.js";
-import getMessagesController from "./messaging/getMessagesController.js";
-import sendMessageController from "./messaging/sendMessagesController.js";
-import getExistingConnectionsController from "./connections/getExistingConnectionsController.js";
-import getSuggestedConnectionsController from "./connections/getSuggestedConnectionsController.js";
-import removeConnectionController from "./connections/removeConnectionController.js";
-import declineSuggestionController from "./connections/declineSuggestionController.js";
-import acceptSuggestionController from "./connections/acceptSuggestionController.js";
-import userLoginController from "./authentication/userLoginController.js";
-import userLogoutController from "./authentication/userLogOutController.js";
-import runIfLoggedIn from "./authentication/loginVerificationController.js";
-import getEmailController from "./userInfo/getEmailController.js";
-import updateLoginController from "./authentication/updateLoginController.js";
-import isUniqueEmailController from "./userInfo/isUniqueEmailController.js";
+import userStatsController from "./server/userInfo/userStatsController.js";
+import getProfileController from "./server/userInfo/getProfileController.js";
+import createUserController from "./server/authentication/createUserController.js";
+import updateProfileController from "./server/userInfo/updateProfleController.js";
+import getMessagesController from "./server/messaging/getMessagesController.js";
+import sendMessageController from "./server/messaging/sendMessagesController.js";
+import getExistingConnectionsController from "./server/connections/getExistingConnectionsController.js";
+import getSuggestedConnectionsController from "./server/connections/getSuggestedConnectionsController.js";
+import removeConnectionController from "./server/connections/removeConnectionController.js";
+import declineSuggestionController from "./server/connections/declineSuggestionController.js";
+import acceptSuggestionController from "./server/connections/acceptSuggestionController.js";
+import userLoginController from "./server/authentication/userLoginController.js";
+import userLogoutController from "./server/authentication/userLogOutController.js";
+import runIfLoggedIn from "./server/authentication/loginVerificationController.js";
+import getEmailController from "./server/userInfo/getEmailController.js";
+import updateLoginController from "./server/authentication/updateLoginController.js";
+import isUniqueEmailController from "./server/userInfo/isUniqueEmailController.js";
 
 
 import mysql from 'mysql2';
@@ -35,7 +35,7 @@ const app = express();
 
 // This will add the body of a POST request to the req.body object
 app.use(express.json());
-app.use(express.static(process.cwd()+"../visage-app/build/"));
+app.use(express.static(process.cwd()+"/visage-app/build/"));
 // // print out the request
 // app.use((req, res, next) => {
 //   if (req.method == "POST") console.log(`Request_Endpoint: ${req.method} ${req.url}`);
