@@ -45,6 +45,5 @@
     "react-router-dom": "^6.5.0",
     "resolve-url-loader": "^5.0.0"
   },
-  "proxy": "http://localhost:3001",
-  "homepage": "https://be2c-2603-8080-27f0-2a90-7577-d49c-2567-2aa0.ngrok-free.app"
+  "proxy": "http://localhost:3001"
 }
