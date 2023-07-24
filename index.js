@@ -20,14 +20,15 @@ import updateLoginController from "./server/authentication/updateLoginController
 import isUniqueEmailController from "./server/userInfo/isUniqueEmailController.js";
 
 
-//import mysql from 'mysql2';
+import mysql from 'mysql2';
+import path from 'path';
 
-// if(process.env.NODE_ENV === 'development'){
-//   var connection = mysql.createConnection({
-//       host: '127.0.0.1',
-//       user: 'root',
-//       // password: '',
-//   });
+//if(process.env.NODE_ENV === 'development'){
+  var connection = mysql.createConnection({
+      host: '127.0.0.1',
+      user: 'root',
+      // password: '',
+  });
 // } else {
 //   var connection = mysql.createConnection({
 //     host: process.env.host, //"visage.database.windows.net", 
@@ -39,21 +40,21 @@ import isUniqueEmailController from "./server/userInfo/isUniqueEmailController.j
 // }
 console.log(process.env);
 
-import sql from 'mssql';
-// SEE HERE
-var connection = sql.createConnection({
-  host: process.env.MYSQLCONNSTR_host, // process.env.host, // "visage.database.windows.net",
-  user: process.env.MYSQLCONNSTR_user, // "visage_admin", // process.env.user,
-  password: process.env.MYSQLCONNSTR_password, // process.env.password,
-  database: process.env.MYSQLCONNSTR_database, // "visage", // process.env.database,
-  Port: process.env.MYSQLCONNSTR_db_port, // process.env.db_port,
-  authentication: {
-    type: 'default'
-  },
-  options: {
-      encrypt: true
-  }
-});
+// import sql from 'mssql';
+// // SEE HERE
+// var connection = sql.createConnection({
+//   host: process.env.MYSQLCONNSTR_host, // process.env.host, // "visage.database.windows.net",
+//   user: process.env.MYSQLCONNSTR_user, // "visage_admin", // process.env.user,
+//   password: process.env.MYSQLCONNSTR_password, // process.env.password,
+//   database: process.env.MYSQLCONNSTR_database, // "visage", // process.env.database,
+//   Port: process.env.MYSQLCONNSTR_db_port, // process.env.db_port,
+//   authentication: {
+//     type: 'default'
+//   },
+//   options: {
+//       encrypt: true
+//   }
+// });
 
 
 connection.connect((err) => {if (err) throw err});
@@ -64,12 +65,14 @@ const app = express();
 
 // This will add the body of a POST request to the req.body object
 app.use(express.json());
-app.use(express.static(process.cwd()+"/visage-app/build/"));
-// // print out the request
-// app.use((req, res, next) => {
-//   if (req.method == "POST") console.log(`Request_Endpoint: ${req.method} ${req.url}`);
-//   next();
-// });
+
+app.use(express.static(path.join(process.cwd(), 'visage-app', 'build')));
+
+// print out the request
+app.use((req, res, next) => {
+  if (req.method == "POST") console.log(`Request_Endpoint: ${req.method} ${req.url}`);
+  next();
+});
 
 app.get("/hello", (req, res) => {
   res.json({ message: "Hello from server!" });
@@ -128,6 +131,10 @@ app.post('/declineSuggestion/',(req, res) => runIfLoggedIn(req, res, declineSugg
 // // POST request to accept a suggested connection
 // /// Might not need an endpoint for this... If a person sends a message, the other person should automatically be considered a connection.
 // app.post('/acceptSuggestion/', (req, res) => acceptSuggestionController(req, res, connection));
+
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(process.cwd(), 'visage-app', 'build', 'index.html'));
+});
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);

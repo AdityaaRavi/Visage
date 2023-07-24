@@ -20,7 +20,8 @@ function App() {
         {localStorage.getItem("sessionId") && <TitleBar />}
       </header>
       <body className='allContent'>
-      <BrowserRouter>
+      {/* <BrowserRouter basename={process.env.PUBLIC_URL}> */}
+      <BrowserRouter basename='./visage-app'>
         <Routes>
             {/* If not logged in, only the login component should be shown regardless of path */}
             <Route path="/login" element={<LoginPage />} />
