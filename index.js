@@ -66,6 +66,7 @@ const app = express();
 // This will add the body of a POST request to the req.body object
 app.use(express.json());
 
+// Adding a static server to allow the frontend to be served from the backend.
 app.use(express.static(path.join(process.cwd(), 'visage-app', 'build')));
 
 // print out the request
@@ -79,59 +80,56 @@ app.get("/hello", (req, res) => {
 });
 ////////////////////////////////// User info //////////////////////////////////
 
-// GET request for user stats (++ connected to the database)
+// GET request for user stats.
 app.get("/userStats/", (req, res) =>  runIfLoggedIn(req, res, userStatsController, connection));
 //app.get("/userStats/", (req, res) => userStatsController(req, res, connection));
 
-// GET request to get a user's profile (++ connected to the database)
+// GET request to get a user's profile.
 app.get('/getProfile/', (req, res) =>  runIfLoggedIn(req, res, getProfileController, connection));
 
-// POST request to create a user account --- NOT YET IMPLEMENTED ON THE FRONTEND (++ connected to the database)
+// POST request to create a user account.
 app.post('/createUser', (req, res) => createUserController(req, res, connection));
 
-// POST request to update a user's profile (++ connected to the database)
+// POST request to update a user's profile.
 app.post('/updateProfile', (req, res) => runIfLoggedIn(req, res, updateProfileController, connection));
 
-// GET request to get a user's email (++ connected to the database)
+// GET request to get a user's email.
 app.get('/getEmail/', (req, res) => runIfLoggedIn(req, res, getEmailController, connection));
 
-// POST request to update a user's login info (++ connected to the database)
+// POST request to update a user's login info.
 app.post('/updateLogin', (req, res) => runIfLoggedIn(req, res, updateLoginController, connection));
 
-// POST request to login a user (++ connected to the database)
+// POST request to login a user.
 app.post('/login', (req, res) => userLoginController(req, res, connection));
 
-// POST request to logout a user (++ connected to the database)
+// POST request to logout a user.
 app.post('/logout', (req, res) => userLogoutController(req, res, connection));
 
-// GET request to check if an email is unique (++ connected to the database)
+// GET request to check if an email is unique.
 app.get('/isUniqueEmail/', (req, res) => isUniqueEmailController(req, res, connection));
 
 ////////////////////////////////// Messaging //////////////////////////////////
-// GET request for all the messages between two users (++ connected to the database)
+// GET request for all the messages between two users.
 app.get("/getMessages/", (req, res) => runIfLoggedIn(req, res, getMessagesController, connection)); 
 
-// POST request to send a message to a user (++ connected to the database)
+// POST request to send a message to a user.
 app.post('/sendMessage/',(req, res) =>  runIfLoggedIn(req, res, sendMessageController, connection));
 //app.post('/sendMessage/',(req, res) =>  sendMessageController(req, res, connection));
 
 ////////////////////////////////// Connections //////////////////////////////////
-// GET request for all the connections of a user  (++ connected to the database)
+// GET request for all the connections of a user.
 app.get("/getExistingConnections/", (req, res) =>  runIfLoggedIn(req, res, getExistingConnectionsController, connection));
 
-// GET request to the connection suggestions created by us for the user (++ connected to the database)
+// GET request to the connection suggestions created by us for the user.
 app.get('/getSuggestedConnections/', (req, res) =>  runIfLoggedIn(req, res, getSuggestedConnectionsController, connection));
 
-// POST request to remove a connection (++ connected to the database)
+// POST request to remove a connection.
 app.post('/removeConnection/',(req, res) => runIfLoggedIn(req, res, removeConnectionController, connection));
 
-// POST request to decline a suggested connection (++ connected to the database)
+// POST request to decline a suggested connection.
 app.post('/declineSuggestion/',(req, res) => runIfLoggedIn(req, res, declineSuggestionController, connection));
 
-// // POST request to accept a suggested connection
-// /// Might not need an endpoint for this... If a person sends a message, the other person should automatically be considered a connection.
-// app.post('/acceptSuggestion/', (req, res) => acceptSuggestionController(req, res, connection));
-
+// GET endpoint to handle internal routing within the react app when the app is deployed.
 app.get('/*', function (req, res) {
   res.sendFile(path.join(process.cwd(), 'visage-app', 'build', 'index.html'));
 });
