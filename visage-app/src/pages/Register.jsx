@@ -148,7 +148,7 @@ function Register(props){
             .then((response) => {
                 if (response.data.short === 'success') {
                     console.log('Profile updated');
-                    window.location.href = '/login';
+                    window.location.href = '/profile';
                     return;
                 }
             })
@@ -271,7 +271,7 @@ function Register(props){
                     onFocus={onChangeSkills}
                     onBlur={onChangeSkills}
                     />
-                    {(!skillsLength || skillsLength < 1 || skillsLength > 4) ? <span style={{color: 'red'}}>{skillsLength}/4 </span> : <span>{skillsLength}/4 </span>}
+                    {(!skillsLength || skillsLength != 4) ? <span style={{color: 'red'}}>{skillsLength}/4 <br /> Four Skills are mandatory</span> : <span>{skillsLength}/4 </span>}
                 
                 </div>
                 <br/>
