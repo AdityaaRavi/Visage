@@ -22,6 +22,10 @@ function ProfileWhole(props){
                     class='img-rounded'
                     id='profile-pic'
                     alt='...'
+                    onError={({ currentTarget }) => {
+                        currentTarget.onerror = null; // prevents looping
+                        currentTarget.src=`${process.env.PUBLIC_URL}/userContent/placeholder.jpg`;
+                      }}
                 />
                 <ProfileInfo id={props.id} myId={props.myId} session={props.session}/>
             </div>
