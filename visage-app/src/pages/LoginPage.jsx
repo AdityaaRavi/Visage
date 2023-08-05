@@ -82,7 +82,7 @@ function LoginPage(props){
           <div className="d-flex flex-column ms-5">
 
             <div className="text-center">
-              <img src={`${process.env.PUBLIC_URL}\\visage.png`}
+              <img src={`${process.env.PUBLIC_URL}\\Visage.png`}
                 style={{width: '185px'}} alt="logo" />
               {/* <h4 className="mt-1 mb-5 pb-1">Welcome to Visage</h4> */}
             </div>
