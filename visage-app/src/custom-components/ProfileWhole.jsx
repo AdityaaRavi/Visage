@@ -4,7 +4,6 @@ import { Image } from 'react-bootstrap';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import ProfileInfo from './ProfileInfo';
-//import image from './adityaa-ravi.png';
 import UserStats from './UserStats';
 import { MDBInput, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 
