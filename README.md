@@ -1,8 +1,19 @@
 # Visage
+
 <img src="./visage-app/public/Visage.png"  width="300" height="300">
 
 <br />
 The ultimate networking app designed from the ground up to help you find new people with similar interests as you and form fruitful connections that help propel you in your career.
+<br />
+
+
+# [Try it out!]((https://6ac4-2603-8080-27f0-2a90-7577-d49c-2567-2aa0.ngrok-free.app))
+
+[Try out the app by clicking this link!](https://6ac4-2603-8080-27f0-2a90-7577-d49c-2567-2aa0.ngrok-free.app)
+- Click "Visit Site" when prompted
+- You can either create your own account by clicking "Register" to get the full experience, or if you just want to quickly try it out, you can use this testing account:
+  - Email: `testing@gmail.com`, and Password: `Password123!`
+  - Please be respectful of others in the platform.  
 
 # How does it work?
 When you create your Visage account, we ask you to share a few details about you such as your career interests, the organizations you have been a part of before, your skills, the organizations you have been a part of thus far, etc and suggest five people at a time who we think would be a great connection for you. You can accept or decline these suggestions, and we will learn to provide you better suggestions based on what you pick.
@@ -20,11 +31,12 @@ Once you accept the suggestion, you and the suggested person will be added as a 
 
 ## Tech Stack
 
-| What     | technology |
-| ----     |  -----     |
-| Frontend | React.js   |
-| Backend  | Node.js    |
-| Database | MySql      |
+| What     | technology                         |
+| ----     |  ------------------------------    |
+| Frontend | React.js                           |
+| Backend  | Node.js                            |
+| Database | MySql                              |
+| Hosting  | Local, port forwarding via ngrok   |
 
 ## How to run the application on your local env
 1. Install MySql. If you use a password, please edit `./index.js` as needed.
@@ -46,26 +58,28 @@ Once you accept the suggestion, you and the suggested person will be added as a 
 
 ## Endpoints
 
-| Name | What |
-| -- | ---|
-**User Info and Authentication** | --- 
-`/userStats` | GET request for user stats
-`/getProfile` | GET request to get a user's profile 
-`/createUser` | POST request to create a user account
-`/updateProfile` | POST request to update a user's profile 
-`/getEmail` | GET request to get a user's email 
-`/updateLogin` | POST request to update a user's login info 
-`/login` | POST request to login a user 
-`/logout` | POST request to logout a user 
-`/isUniqueEmail` | GET request to check if an email is unique 
-**Messaging** | ---
-`/getMessages` | GET request for all the messages between two users 
-`/sendMessage` | POST request to send a message to a user 
-**Connections** | --
-`/getExistingConnections` | GET request for all the connections of a user 
-`/getSuggestedConnections` | GET request to the connection suggestions created by us for the user 
-`/removeConnection` | POST request to remove a connection 
-`/declineSuggestion` | POST request to decline a suggested connection
+ Name                  | What 
+ --------------------- | ------------------------------
+**User Info and Authentication**    | --- 
+`/userStats`                        | GET request for user stats
+`/getProfile`                       | GET request to get a user's profile 
+`/createUser`                       | POST request to create a user account
+`/updateProfile`                    | POST request to update a user's profile 
+`/getEmail`                         | GET request to get a user's email 
+`/updateLogin`                      | POST request to update a user's login info 
+`/login`                            | POST request to login a user 
+`/logout`                           | POST request to logout a user 
+`/isUniqueEmail`                    | GET request to check if an email is unique 
+--- | ---
+**Messaging**   | ---
+`/getMessages`  | GET request for all the messages between two users 
+`/sendMessage`  | POST request to send a message to a user 
+--- | ---
+**Connections**             | --
+`/getExistingConnections`   | GET request for all the connections of a user 
+`/getSuggestedConnections`  | GET request to the connection suggestions created by us for the user 
+`/removeConnection`         | POST request to remove a connection 
+`/declineSuggestion`        | POST request to decline a suggested connection
 
 ## "The Algorithm"
 
@@ -91,11 +105,11 @@ Essentially to prevent something like the [Moon Pig security bug](https://www.th
 
 ### Password
 
-Right now, users' password are transmitted as plain text upon login... While this should be fine as long as the connection is SSL encrypted, it is definitely not ideal. So one of the next steps for Visage is to do away with passwords entirely (at on our side) and implement 3rd party login. (Example: Login with Google)
+Right now, users' password are transmitted as plain text upon login and user creation (and in no other case)... While this should be fine as long as the connection is SSL encrypted, it is definitely not ideal. So one of the next steps for Visage is to do away with passwords entirely (on our side at least) and implement 3rd party login. (Example: Login with Google)
 
 
 ## Future Plans
-1. I am currently learning AWS and I plan to host Visage there in the near future.
+1. I am currently learning AWS and I plan to host Visage there in the near future instead of locally.
    
 2. It is a lot easier and secure for Visage and for Visage's users if we use a 3rd party login service. So I am planning to use login via Google and not deal with passwords on my own. 
 

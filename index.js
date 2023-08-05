@@ -22,39 +22,24 @@ import isUniqueEmailController from "./server/userInfo/isUniqueEmailController.j
 
 import mysql from 'mysql2';
 import path from 'path';
+import mysql1 from 'mysql';
 
-//if(process.env.NODE_ENV === 'development'){
+
+// if RDS_HOSTNAME is not defined, then we are running locally
+if (process.env.RDS_HOSTNAME === undefined) {
   var connection = mysql.createConnection({
-      host: '127.0.0.1',
-      user: 'root',
-      // password: '',
+    host: '127.0.0.1',
+    user: 'root',
   });
-// } else {
-//   var connection = mysql.createConnection({
-//     host: process.env.host, //"visage.database.windows.net", 
-//     user: process.env.user,//"visage_admin", 
-//     password: process.env.password,
-//     database: process.env.database, 
-//     Port: process.env.db_port,
-//   });
-// }
-console.log(process.env);
-
-// import sql from 'mssql';
-// // SEE HERE
-// var connection = sql.createConnection({
-//   host: process.env.MYSQLCONNSTR_host, // process.env.host, // "visage.database.windows.net",
-//   user: process.env.MYSQLCONNSTR_user, // "visage_admin", // process.env.user,
-//   password: process.env.MYSQLCONNSTR_password, // process.env.password,
-//   database: process.env.MYSQLCONNSTR_database, // "visage", // process.env.database,
-//   Port: process.env.MYSQLCONNSTR_db_port, // process.env.db_port,
-//   authentication: {
-//     type: 'default'
-//   },
-//   options: {
-//       encrypt: true
-//   }
-// });
+} else {
+  var connection = mysql1.createConnection({
+    host: process.env.RDS_HOSTNAME,
+    user: process.env.RDS_PORT,
+    password: process.env.RDS_PASSWORD,
+    database: process.env.RDS_DB_NAME,
+    Port: process.env.RDS_USERNAME,
+  });
+}
 
 
 connection.connect((err) => {if (err) throw err});
