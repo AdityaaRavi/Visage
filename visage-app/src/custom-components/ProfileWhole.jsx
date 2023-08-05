@@ -24,7 +24,7 @@ function ProfileWhole(props){
                     alt='...'
                     onError={({ currentTarget }) => {
                         currentTarget.onerror = null; // prevents looping
-                        currentTarget.src=`${process.env.PUBLIC_URL}/userContent/placeholder.jpg`;
+                        currentTarget.src=`${process.env.PUBLIC_URL}/placeholder.jpg`;
                       }}
                 />
                 <ProfileInfo id={props.id} myId={props.myId} session={props.session}/>
