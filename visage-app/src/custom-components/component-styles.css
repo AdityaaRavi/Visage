@@ -34,11 +34,11 @@ em{
 
 #profile-pic{
     width: 30vw;
-    height: var(width);
+    height: 30vw;
     max-width: 258px;
-    max-height: var(max-width);
-    min-width: 220px;
-    min-height: var(min-width);
+    max-height: 258px;
+    min-width: 258px;
+    min-height: 258px;
     margin: 43px;
     margin-left: 0;
     border-radius: 50%;
