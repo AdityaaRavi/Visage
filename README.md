@@ -7,13 +7,10 @@ The ultimate networking app designed from the ground up to help you find new peo
 <br />
 
 
-# [Try it out!]((https://6ac4-2603-8080-27f0-2a90-7577-d49c-2567-2aa0.ngrok-free.app))
+# [Try it out!](http://ec2-3-144-14-18.us-east-2.compute.amazonaws.com:3001/)
 
-[Try out the app by clicking this link!](https://6ac4-2603-8080-27f0-2a90-7577-d49c-2567-2aa0.ngrok-free.app)
-- Click "Visit Site" when prompted
-- You can either create your own account by clicking "Register" to get the full experience, or if you just want to quickly try it out, you can use this testing account:
-  - Email: `testing@gmail.com`, and Password: `Password123!`
-  - Please be respectful of others in the platform.  
+[Try out the app by clicking this link!](http://ec2-3-144-14-18.us-east-2.compute.amazonaws.com:3001/)
+- Click "register" to create an account, and start connecting with people!
 
 # How does it work?
 When you create your Visage account, we ask you to share a few details about you such as your career interests, the organizations you have been a part of before, your skills, the organizations you have been a part of thus far, etc and suggest five people at a time who we think would be a great connection for you. You can accept or decline these suggestions, and we will learn to provide you better suggestions based on what you pick.
@@ -22,7 +19,7 @@ Once you accept the suggestion, you and the suggested person will be added as a 
 
 # See the App in action!
 
-</insert youtube video>
+Youtube video coming soon!
 
 ## Some Screenshots
 
@@ -35,8 +32,8 @@ Once you accept the suggestion, you and the suggested person will be added as a 
 | ----     |  ------------------------------    |
 | Frontend | React.js                           |
 | Backend  | Node.js                            |
-| Database | MySql                              |
-| Hosting  | Local, port forwarding via ngrok   |
+| Database | MySQL on AWS RDS                   |
+| Hosting  | AWS EC2                            |
 
 ## How to run the application on your local env
 1. Install MySql. If you use a password, please edit `./index.js` as needed.
@@ -91,6 +88,9 @@ I made a quick cut-price clustering algorithm that works well enough for the pur
 
 
 ## Cyber Security Measures
+
+Disclaimer: While I have taken a lot of measures to ensure that Visage is secure, I am not a cyber security expert, and I don't provide any guarantees that Visage is a 100% secure. If you find any vulnerabilities, please let me know.
+
 ### SQL injection
 All SQL statements run by the server is parameterized--i.e no hacker provided query will be run.
 
@@ -109,10 +109,10 @@ Right now, users' password are transmitted as plain text upon login and user cre
 
 
 ## Future Plans
-1. I am currently learning AWS and I plan to host Visage there in the near future instead of locally.
+1. Make the UI more mobile friendly. 
    
 2. It is a lot easier and secure for Visage and for Visage's users if we use a 3rd party login service. So I am planning to use login via Google and not deal with passwords on my own. 
 
 3. Once I get this hosted and get a few people using Visage, I plan to switch to a proper clustering algorithm for scalability and better connection suggestions.
 
-
+4. Explore options to enable HTTPS on the server.
