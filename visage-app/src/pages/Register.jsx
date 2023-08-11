@@ -160,7 +160,7 @@ function Register(props){
 
   return (
       <div className="container">
-      <img src={`${process.env.PUBLIC_URL}\\visage.png`}
+      <img src={`${process.env.PUBLIC_URL}\\Visage.png`}
               style={{width: '185px'}} alt="logo" />
       <h1> Register </h1>
       <br />
@@ -281,7 +281,6 @@ function Register(props){
         </div>
       }
       <br />
-
         <Button type="submit" 
                 className="btn btn-primary" 
                 onClick={onSubmit} 
