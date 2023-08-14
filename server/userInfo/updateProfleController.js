@@ -4,18 +4,18 @@ const updateProfileController = (req, res, mysqlConnection) => {
   // password = req.body.password;
   let userId = req.body.userId;
   
-  let topSkills = req.body.top4Skills.map((x) => x.toLowerCase().trim());
+  let topSkills = req.body.top4Skills.map((x) => x.trim());
   
-  let orgs = req.body.orgs.map((x) => x.toLowerCase().trim());
+  let orgs = req.body.orgs.map((x) => x.trim());
   if (orgs.length < 4) for (let i = orgs.length; i < 4; i++) orgs.push(null);
   
-  let schools = req.body.schools.map((x) => x.toLowerCase().trim());
+  let schools = req.body.schools.map((x) => x.trim());
   if (schools.length < 3) for (let i = schools.length; i < 3; i++) schools.push(null);
   
-  let career = req.body.career.map((x) => x.toLowerCase().trim());
+  let career = req.body.career.map((x) => x.trim());
   if (career.length < 3) for (let i = career.length; i < 3; i++) career.push(null);
   
-  let fun = req.body.fun.map((x) => x.toLowerCase().trim());
+  let fun = req.body.fun.map((x) => x.trim());
   if (fun.length < 3) for (let i = fun.length; i < 3; i++) fun.push(null);
   
   const description = req.body.description;

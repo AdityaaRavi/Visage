@@ -19,7 +19,9 @@ const createSuggestionsHelper = async (numSuggestions, userId, res, mysqlConnect
             let career = [result[0].career1, result[0].career2, result[0].career3];
             let fun = [result[0].fun1, result[0].fun2, result[0].fun3];
             let combinedInterests = orgs.concat(schools, career, fun, orgs);
-            // console.log("SEE_______user info of " + userId + ": " + combinedInterests);
+            // convert all interests to lowercase
+            combinedInterests = combinedInterests.map((interest) => interest == null ? null : interest.toLowerCase());
+
             // step 2
             mysqlConnection.query(`SELECT * FROM suggested_connections WHERE (lower_userID=? OR higher_userID=?);`, [userId, userId], (err, previouslySuggested) => {
                 if (err) throw err;
@@ -32,8 +34,7 @@ const createSuggestionsHelper = async (numSuggestions, userId, res, mysqlConnect
                 // `SELECT * FROM user_info WHERE (org1=? OR org2=? OR org3=? OR org4=? OR school1=? OR school2=? OR school3=? OR career1=? OR career2=? OR career3=? OR fun1=? OR fun2=? OR fun3=?) AND userId != ?;`, [...combinedInterests, userId], (err, possibleSuggestions) => {
                 mysqlConnection.query(`SELECT * FROM user_info WHERE userId != ?;`, [userId], (err, possibleSuggestions) => {
                     if (err) throw err;
-                    //console.log("SEE_______possible suggestions: ");
-                    //console.log(possibleSuggestions);
+                    
                     let unfilteredSuggestions = possibleSuggestions.map((result) => {return {
                         id: result.userId,
                         name: result.name,
@@ -41,15 +42,14 @@ const createSuggestionsHelper = async (numSuggestions, userId, res, mysqlConnect
                                                        [result.career1, result.career2, result.career3], 
                                                        [result.fun1, result.fun2, result.fun3],
                                                        [result.org1, result.org2, result.org3, result.org4])
+                                                .map((interest) => interest == null ? null : interest.toLowerCase())
                         }});
-                    // ("SEE_______unfiltered suggestions: ");
-                    // for(let i = 0; i < unfilteredSuggestions.length; i++) console.log(unfilteredSuggestions[i].id + ": " + unfilteredSuggestions[i].combinedInterests);
+                    
                     // step 4
                     //console.log("SEE_______previously suggested: " + previouslySuggested);
                     let filteredSuggestions = unfilteredSuggestions.filter((suggestion) => !previouslySuggested.includes(suggestion.id));
                     
-                    //let filteredSuggestions = unfilteredSuggestions;
-                    // // step 5.1
+                    // step 5.1
                     // create a map of the number of matching interests for each suggestion
                     filteredSuggestions = filteredSuggestions.map((suggestion) => {return {
                         id: suggestion.id,
@@ -57,8 +57,6 @@ const createSuggestionsHelper = async (numSuggestions, userId, res, mysqlConnect
                         // of the non-null combined interests, how many are in the combined interests of the user?
                         numMatchingInterests: suggestion.combinedInterests.filter((interest) => combinedInterests.includes(interest) && interest != null).length
                     }});
-                    //console.log("SEE_______filtered suggestions: ");
-                    //for(let i = 0; i < filteredSuggestions.length; i++) console.log(filteredSuggestions[i].id + ": " + filteredSuggestions[i].numMatchingInterests);
                     // step 5.2
                     // sort the list of suggestions by the number of matching interests in descending order
                     filteredSuggestions.sort((a, b) => b.numMatchingInterests - a.numMatchingInterests);
