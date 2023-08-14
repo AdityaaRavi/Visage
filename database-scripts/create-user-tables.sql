@@ -36,6 +36,7 @@ CREATE TABLE `user_info` (
 	`description` VARCHAR(300),
 	`time_of_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     `time_of_creation` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`profile_pic` VARCHAR(100),
 	PRIMARY KEY (`userId`),
     KEY `search` (`name`,`org1`),
     KEY `search1` (`name`,`school1`)

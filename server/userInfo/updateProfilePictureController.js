@@ -1,4 +1,5 @@
 import fs from 'fs';
+// import {compress, compressAccurately} from 'image-conversion';
 
 const updateProfilePictureController = async (req, res) => {
     const file = req.file
