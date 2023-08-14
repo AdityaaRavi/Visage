@@ -34,7 +34,7 @@ if (process.env.RDS_HOSTNAME === undefined) {
     user: 'root',
   });
 } else {
-  var connection = mysql1.createConnection({
+  var connection = mysql.createConnection({
     host: process.env.RDS_HOSTNAME,
     port: process.env.RDS_PORT,
     password: process.env.RDS_PASSWORD,
