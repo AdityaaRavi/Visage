@@ -61,7 +61,7 @@ function UpdateImage(props){
             <h1>Edit your profile picture </h1>
                 <div className="form-group">
                     <br />
-                    <input onChange={fileSelected} type="file" accept="image/*"></input>
+                    <input onChange={fileSelected} type="file" accept="image/jpg"></input>
                     <br/>
                     {sizeError && <span style={{color: 'red'}}> File size must be less than 1MB - {file.size/1000000}MB/1MB </span>}
                     {noFileError && <span style={{color: 'red'}}> Please select a file </span>}
