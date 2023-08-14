@@ -15,7 +15,7 @@ function UpdateImage(props){
 
     const onSubmit = (e) => {
         // making sure there are no errors in the input fields
-        if (sizeError) {
+        if (sizeError || !file) {
             return;
         }
 

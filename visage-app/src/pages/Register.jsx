@@ -132,7 +132,7 @@ function Register(props){
           });
       } else {  
         // making sure there are no errors in the input fields
-        if (emailError || passwordError || nameError || descriptionError || lengthError || sizeError) {
+        if (emailError || passwordError || nameError || descriptionError || lengthError || sizeError || noFileError) {
             return;
         }
 
