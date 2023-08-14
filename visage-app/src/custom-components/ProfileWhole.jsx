@@ -30,7 +30,7 @@ function ProfileWhole(props){
             {/* {props.inConnectionPage && <h1 className='pageHeading'>Their Profile</h1>} */}
             <div className={className}>
                 <img
-                    src={`http://localhost:3001/${props.id}.jpeg`}
+                    src={`http://3.144.14.18:3001/${props.id}.jpeg`}
                     class='img-rounded'
                     id='profile-pic'
                     alt='...'
