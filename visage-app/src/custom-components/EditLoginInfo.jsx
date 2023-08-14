@@ -13,6 +13,7 @@ function EditLoginInfo(props){
 
     // states
     const [emailError, setEmailError] = useState(false);
+    const [uniqueEmailError, setUniqueEmailError] = useState(false);
     const [newPasswordError, setNewPasswordError] = useState(false);
     const [oldPasswordError, setOldPasswordError] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -34,6 +35,7 @@ function EditLoginInfo(props){
                     let data = response.data;
                     if (data != 'invalid_input') {
                         setEmail(data.email);
+                        localStorage.setItem('email', data.email);
                     }
                 })
                 .catch((err) => {
@@ -84,7 +86,8 @@ function EditLoginInfo(props){
             return;
         }
 
-        axios
+        const task = () => {
+            axios
             .post('/updateLogin',{
                                     myId: props.myId, 
                                     userId: props.id, 
@@ -110,6 +113,24 @@ function EditLoginInfo(props){
             .catch((err) => {
                 console.log(err);
             });
+        }
+
+        // If the user changes their email, make sure it is unique
+        if (email !== localStorage.getItem('email')) {
+            axios.get('/isUniqueEmail', { params: { email: email } }).then((response) => {
+                if (response.data === 'is_new'){
+                    setUniqueEmailError(false);
+                    task();
+                } else {
+                    setUniqueEmailError(true);
+                } 
+            });
+        } else {
+            setUniqueEmailError(false);
+            task();
+        }
+
+        
     }
 
     return (
@@ -118,16 +139,15 @@ function EditLoginInfo(props){
             {email &&
             <div>
                 <br />
-                <br />
-                <br />
                 <div className="form-group">
                     <label><em>Email</em></label>
                     <input type="text" className="form-control" value={email} onChange={onChangeEmail} />
                     {emailError && <span style={{color: 'red'}}>Should be a valid email address.</span>}
+                    {uniqueEmailError && <span style={{color: 'red'}}>Email already exists.</span>}
                 </div>
                 <br/>
                 <div className="form-group">
-                    <label><em>Current Password:</em></label>
+                    <label><em>Current Password</em></label>
                     <input type="password" className="form-control" value={oldPassword} onChange={onChangeOldPassword} />
                     {oldPasswordError && <span style={{color: 'red'}}>Not a valid password.</span>}
                 </div>
@@ -137,7 +157,7 @@ function EditLoginInfo(props){
                 <br/>
                 {changePassword &&
                 <div className="form-group">
-                    <label><em>New Password:</em></label>
+                    <label><em>New Password</em></label>
                     <input type="password" className="form-control" value={newPassword} onChange={onChangeNewPassword} />
                     {newPasswordError && 
                     <span style={{color: 'red'}}>
