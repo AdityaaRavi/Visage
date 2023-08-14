@@ -234,17 +234,6 @@ em{
     .profile-viewport{
         flex-direction: column;
     }
-    #profile-pic{
-        width: 75vw;
-        height: var(width);
-        max-width: 50%;
-        max-height: var(max-width);
-        min-width: 220px;
-        min-height: var(min-width);
-        margin: 43px;
-        margin-left: 0;
-        border-radius: 50%;
-    }
     .skillsDisplay{
         flex-direction: column;
     }
