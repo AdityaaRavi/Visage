@@ -16,6 +16,10 @@ function Register(props){
   const [descriptionError, setDescriptionError] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [sizeError, setSizeError] = useState(false);
+  const [noFileError, setNoFileError] = useState(true);
+  const [file, setFile] = useState(null);
+
 
   // length of the arrays
   const [orgsLength, setOrgsLength] = useState(0);
@@ -128,23 +132,25 @@ function Register(props){
           });
       } else {  
         // making sure there are no errors in the input fields
-        if (emailError || passwordError || nameError || descriptionError || lengthError) {
+        if (emailError || passwordError || nameError || descriptionError || lengthError || sizeError) {
             return;
         }
 
+        const formData = new FormData();
+        formData.append('image', file);
+        formData.append('name', name);
+        formData.append('email', email);
+        formData.append('password', password);
+        formData.append('orgs', orgs);
+        formData.append('schools', schools);
+        formData.append('career', career);
+        formData.append('fun', fun);
+        formData.append('description', description);
+        formData.append('top4Skills', skills);
+        
+
         axios
-            .post('/createUser',{
-                                    name: name, 
-                                    email: email, 
-                                    password: password,
-                                    orgs: orgs, 
-                                    schools: schools, 
-                                    career: career, 
-                                    fun: fun, 
-                                    description: description, 
-                                    name: name, 
-                                    top4Skills: skills,
-                                })
+            .post('/createUser', formData)
             .then((response) => {
                 if (response.data.short === 'success') {
                     console.log('Profile updated');
@@ -156,7 +162,18 @@ function Register(props){
                 console.log(err);
             });
       }
-  }
+   }
+
+    const onFileSelected = (e) => {
+        const file = e.target.files[0];
+        setFile(file);
+        setNoFileError(false);
+        if (file.size > 1000000) {
+            setSizeError(true);
+        }else{
+            setSizeError(false);
+        }
+    }
 
   return (
       <div className="container">
@@ -272,9 +289,16 @@ function Register(props){
                     onBlur={onChangeSkills}
                     />
                     {(!skillsLength || skillsLength != 4) ? <span style={{color: 'red'}}>{skillsLength}/4 <br /> Four Skills are mandatory</span> : <span>{skillsLength}/4 </span>}
-                
                 </div>
                 <br/>
+                <div className="form-group">
+                    <label><em>Profile Picture</em></label>
+                    <br/>
+                    <input onChange={onFileSelected} type="file" accept="image/*"></input>
+                    <br/>
+                    {sizeError && <span style={{color: 'red'}}> File size must be less than 1MB - {file.size/1000000}MB/1MB </span>}
+                    {noFileError && <span style={{color: 'red'}}> Please select a file </span>}
+                </div>
                 </div>
             </div>
             }

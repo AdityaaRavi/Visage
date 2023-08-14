@@ -17,7 +17,7 @@ function ProfileWhole(props){
             {/* {props.inConnectionPage && <h1 className='pageHeading'>Their Profile</h1>} */}
             <div className={className}>
                 <img
-                    src={`${process.env.PUBLIC_URL}/userContent/${props.id}.jpg`}
+                    src={`http://localhost:3001/${props.id}.jpeg`}
                     class='img-rounded'
                     id='profile-pic'
                     alt='...'
