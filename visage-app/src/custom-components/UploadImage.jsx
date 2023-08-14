@@ -70,7 +70,7 @@ function UpdateImage(props){
                 <Button type="submit" 
                         className="btn btn-primary" 
                         onClick={onSubmit} 
-                        disabled={sizeError}
+                        disabled={sizeError || !file}
                 >
                     Update
                 </Button>
