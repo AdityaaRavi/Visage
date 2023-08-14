@@ -249,7 +249,7 @@ function EditProfile(props){
                     {(!careerLength || careerLength < 1 || careerLength > 3) ? <span style={{color: 'red'}}>{careerLength}/3 </span> : <span>{careerLength}/3 </span>}
                 
                 <div className="form-group">
-                    <label> <em>Ideas of fun:</em></label>
+                    <label> <em>Ideas of fun</em></label>
                     <input type="text" className="form-control" value={fun.map((x) => " " + x)} 
                     onChange={onChangeFun} 
                     onLoad={onChangeFun} 
