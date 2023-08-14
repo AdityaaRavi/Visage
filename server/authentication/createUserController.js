@@ -1,23 +1,24 @@
 import createSuggestionsHelper from "../connections/createSuggestionsHelper.js";
+import fs from 'fs';
 
 const createUserController = (req, res, mysqlConnection) => {
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
     
-    let topSkills = req.body.top4Skills;
+    let topSkills = req.body.top4Skills.split(",");
     if (topSkills.length != 4) res.send("invalid_input");
     
-    let orgs = req.body.orgs;
+    let orgs = req.body.orgs.split(",");
     if (orgs.length < 4) for (let i = orgs.length; i < 4; i++) orgs.push(null);
     
-    let schools = req.body.schools;
+    let schools = req.body.schools.split(",");
     if (schools.length < 3) for (let i = schools.length; i < 3; i++) schools.push(null);
     
-    let career = req.body.career;
+    let career = req.body.career.split(",");
     if (career.length < 3) for (let i = career.length; i < 3; i++) career.push(null);
     
-    let fun = req.body.fun;
+    let fun = req.body.fun.split(",");
     if (fun.length < 3) for (let i = fun.length; i < 3; i++) fun.push(null);
     
     const description = req.body.description;
@@ -55,6 +56,11 @@ const createUserController = (req, res, mysqlConnection) => {
             if (err) throw err;
             // create initial connection suggestions
             await createSuggestionsHelper(5, userId, res, mysqlConnection);
+
+            // rename profile picture to make it accessible via the static route
+            const file = req.file
+            const imageExtn = file.mimetype.split('/')[1];
+            fs.renameSync(file.path, './profilePictures/' + userId + '.' + imageExtn);
 
             res.json({
               message: `User created successfully!\nName: ${name}, userId: ${userId}`,

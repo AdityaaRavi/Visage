@@ -11,18 +11,20 @@ import getExistingConnectionsController from "./server/connections/getExistingCo
 import getSuggestedConnectionsController from "./server/connections/getSuggestedConnectionsController.js";
 import removeConnectionController from "./server/connections/removeConnectionController.js";
 import declineSuggestionController from "./server/connections/declineSuggestionController.js";
-import acceptSuggestionController from "./server/connections/acceptSuggestionController.js";
 import userLoginController from "./server/authentication/userLoginController.js";
 import userLogoutController from "./server/authentication/userLogOutController.js";
 import runIfLoggedIn from "./server/authentication/loginVerificationController.js";
 import getEmailController from "./server/userInfo/getEmailController.js";
 import updateLoginController from "./server/authentication/updateLoginController.js";
 import isUniqueEmailController from "./server/userInfo/isUniqueEmailController.js";
+import updateProfilePictureController from "./server/userInfo/updateProfilePictureController.js";
 
 
 import mysql from 'mysql2';
 import path from 'path';
-import mysql1 from 'mysql';
+import multer from 'multer';
+const upload = multer({ dest: './profilePictures/'});
+
 
 
 // if RDS_HOSTNAME is not defined, then we are running locally
@@ -34,10 +36,10 @@ if (process.env.RDS_HOSTNAME === undefined) {
 } else {
   var connection = mysql1.createConnection({
     host: process.env.RDS_HOSTNAME,
-    user: process.env.RDS_PORT,
+    port: process.env.RDS_PORT,
     password: process.env.RDS_PASSWORD,
     database: process.env.RDS_DB_NAME,
-    Port: process.env.RDS_USERNAME,
+    user: process.env.RDS_USERNAME,
   });
 }
 
@@ -54,11 +56,16 @@ app.use(express.json());
 // Adding a static server to allow the frontend to be served from the backend.
 app.use(express.static(path.join(process.cwd(), 'visage-app', 'build')));
 
-// print out the request
-app.use((req, res, next) => {
-  if (req.method == "POST") console.log(`Request_Endpoint: ${req.method} ${req.url}`);
-  next();
-});
+// Adding a static server to allow the profile pictures to be served from the backend.
+app.use(express.static(path.join(process.cwd(), 'profilePictures')));
+
+// print out the request if the program is running locally
+if (process.env.RDS_HOSTNAME === undefined) {
+  app.use((req, res, next) => {
+    if (req.method == "POST") console.log(`Request_Endpoint: ${req.method} ${req.url}`);
+    next();
+  });
+}
 
 app.get("/hello", (req, res) => {
   res.json({ message: "Hello from server!" });
@@ -73,7 +80,7 @@ app.get("/userStats/", (req, res) =>  runIfLoggedIn(req, res, userStatsControlle
 app.get('/getProfile/', (req, res) =>  runIfLoggedIn(req, res, getProfileController, connection));
 
 // POST request to create a user account.
-app.post('/createUser', (req, res) => createUserController(req, res, connection));
+app.post('/createUser', upload.single('image'), (req, res) => createUserController(req, res, connection));
 
 // POST request to update a user's profile.
 app.post('/updateProfile', (req, res) => runIfLoggedIn(req, res, updateProfileController, connection));
@@ -92,6 +99,9 @@ app.post('/logout', (req, res) => userLogoutController(req, res, connection));
 
 // GET request to check if an email is unique.
 app.get('/isUniqueEmail/', (req, res) => isUniqueEmailController(req, res, connection));
+
+// POST request to change the profile picture of a user.
+app.post('/updateProfilePicture/', upload.single('image'), (req, res) => runIfLoggedIn(req, res, updateProfilePictureController, connection));
 
 ////////////////////////////////// Messaging //////////////////////////////////
 // GET request for all the messages between two users.
