@@ -5,21 +5,19 @@
 <br />
 The ultimate networking app designed from the ground up to help you find new people with similar interests as you and form fruitful connections that help propel you in your career.
 <br />
+<br />
 
-
-# [Try it out!](http://ec2-3-144-14-18.us-east-2.compute.amazonaws.com:3001/)
+# [See the App in action! (YouTube Video)](https://youtu.be/fDX-1QZa8h0)
+[![Video Thumbnail](https://img.youtube.com/vi/fDX-1QZa8h0/0.jpg)](https://www.youtube.com/watch?v=fDX-1QZa8h0)
+<!-- # [Try it out!](http://ec2-3-144-14-18.us-east-2.compute.amazonaws.com:3001/)
 
 [Try out the app by clicking this link!](http://ec2-3-144-14-18.us-east-2.compute.amazonaws.com:3001/)
-- Click "register" to create an account, and start connecting with people!
+- Click "register" to create an account, and start connecting with people! -->
 
 # How does it work?
 When you create your Visage account, we ask you to share a few details about you such as your career interests, the organizations you have been a part of before, your skills, the organizations you have been a part of thus far, etc and suggest five people at a time who we think would be a great connection for you. You can accept or decline these suggestions, and we will learn to provide you better suggestions based on what you pick.
 
 Once you accept the suggestion, you and the suggested person will be added as a connection and you can message each other though Visage.
-
-# See the App in action!
-
-Youtube video coming soon!
 
 ## Some Screenshots
 
