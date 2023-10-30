@@ -19,8 +19,6 @@ When you create your Visage account, we ask you to share a few details about you
 
 Once you accept the suggestion, you and the suggested person will be added as a connection and you can message each other though Visage.
 
-## Some Screenshots
-
 
 # Technical Details
 
